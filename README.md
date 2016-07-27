@@ -2,7 +2,7 @@
 
 KickStart is a collection of useful resuable functions which are too small to be have its own library.
 
-## Extensions (KickStart.Net.dll)
+## KickStart.Net.dll
 
 ### DictionaryExtensions
 * `RemoveRange` removes multiple keys from a dictionary
@@ -12,3 +12,9 @@ KickStart is a collection of useful resuable functions which are too small to be
 ### StreamExtensions
 * `ToStream` converts from `string` or `byte[]` into `stream`
 * `StreamToString` converts from `stream` to `string`
+
+### PrintExtensions
+* `Print` or `P` to print out the object in console
+
+## Diagnostic
+* `Trace.Here()` returns a trace object which contains the line number, method name and file name where the method is called
