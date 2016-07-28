@@ -10,3 +10,4 @@ _ReSharper.*
 UnitTest-Results.xml
 packages/
 .vs
+_NCrunch*
