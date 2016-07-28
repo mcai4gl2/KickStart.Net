@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KickStart.Net.Extensions
 {
@@ -25,7 +26,6 @@ namespace KickStart.Net.Extensions
                     break;
                 }
             }
-            Console.WriteLine($"Total number of items: {count + 1}");
         }
 
         public static void P<T>(this IEnumerable<T> inputs, int top = 10) => Print(inputs, top);
@@ -43,7 +43,6 @@ namespace KickStart.Net.Extensions
                     break;
                 }
             }
-            Console.WriteLine($"Total number of items: {count + 1}");
         }
 
         public static void P<TK, TV>(this IDictionary<TK, TV> inputs, int top = 10) => Print(inputs, top);
