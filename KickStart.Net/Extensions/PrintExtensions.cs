@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace KickStart.Net.Extensions
 {
@@ -10,5 +11,41 @@ namespace KickStart.Net.Extensions
         }
 
         public static void P(this object input) => Print(input);
+
+        public static void Print<T>(this IEnumerable<T> inputs, int top = 10)
+        {
+            int count = 0;
+            foreach (var input in inputs)
+            {
+                Console.WriteLine($"{count} - {input}");
+                count++;
+                if (count >= top)
+                {
+                    Console.WriteLine("...");
+                    break;
+                }
+            }
+            Console.WriteLine($"Total number of items: {count + 1}");
+        }
+
+        public static void P<T>(this IEnumerable<T> inputs, int top = 10) => Print(inputs, top);
+
+        public static void Print<TK, TV>(this IDictionary<TK, TV> inputs, int top = 10)
+        {
+            int count = 0;
+            foreach (var kvp in inputs)
+            {
+                Console.WriteLine($"{kvp.Key} - {kvp.Value}");
+                count++;
+                if (count >= top)
+                {
+                    Console.WriteLine("...");
+                    break;
+                }
+            }
+            Console.WriteLine($"Total number of items: {count + 1}");
+        }
+
+        public static void P<TK, TV>(this IDictionary<TK, TV> inputs, int top = 10) => Print(inputs, top);
     }
 }
