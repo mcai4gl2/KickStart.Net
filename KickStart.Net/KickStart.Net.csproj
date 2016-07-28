@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\NumberExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Diagnostic\Trace.cs" />
     <Compile Include="Extensions\PrintExtensions.cs" />
