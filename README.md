@@ -11,7 +11,7 @@ KickStart is a collection of useful resuable functions which are too small to be
 * `AddRange` adds multiple items to a `ICollection<T>`
 * `SetRange` adds or replaces multiple items in a `ICollection<T>` or `IList<T>`
 * `ToHashSet` adds all the item in an `IEnumerable<T>` into a new `HashSet<T>`
-* 
+
 ### StreamExtensions
 * `ToStream` converts from `string` or `byte[]` into `stream`
 * `StreamToString` converts from `stream` to `string`
