@@ -11,6 +11,6 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-    - cd KickStart.Net && nuget pack KickStart.Net.nuspec -Version $VERSION.$TRAVIS_BUILD_NUMBER-unstable -IncludeReferencedProjects -Prop Configuration=Release && nuget push *.nupkg $NUGET_API_KEY -verbosity detailed
+    - cd KickStart.Net && nuget pack KickStart.Net.nuspec -Version $VERSION.$TRAVIS_BUILD_NUMBER-prelease -IncludeReferencedProjects -Prop Configuration=Release && nuget push *.nupkg $NUGET_API_KEY -verbosity detailed
   on:
-    all_branches: true
+    branch: master
