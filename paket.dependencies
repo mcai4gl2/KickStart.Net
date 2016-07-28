@@ -1,3 +1,0 @@
-source https://nuget.org/api/v2
-
-nuget NUnit < 3.0.0 framework: net451

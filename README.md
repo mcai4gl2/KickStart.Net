@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mcai4gl2/KickStart.Net.svg)](https://travis-ci.org/mcai4gl2/KickStart.Net)
+
 # KickStart.Net
 
 KickStart is a collection of useful resuable functions which are too small to be have its own library.

@@ -1,10 +1,8 @@
 language: csharp
 solution: KickStart.Net.sln
 install:
-  - paket install
+  - nuget restore KickStart.Net.sln
   - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release /p:VbcToolExe=vbnc.exe KickStart.Net.sln
   - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./KickStart.Net.Tests/bin/Release/KickStart.Net.Tests.dll
-after_success:
-  - coveralls
