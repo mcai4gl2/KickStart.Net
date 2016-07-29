@@ -101,6 +101,37 @@ namespace KickStart.Net.Tests.Extensions
             Assert.AreEqual(testData4, items[3], "testData4 added to then end");
         }
 
+        [Test]
+        public void can_create_delimited_string_using_default_delimiter()
+        {
+            var items = new[] { 1, 2, 3 };
+            Assert.AreEqual("1,2,3", items.ToDelimitedString());
+        }
+
+        [Test]
+        public void can_create_delimited_string_using_custom_delimiter()
+        {
+            var items = new[] { 1, 2, 3 };
+            Assert.AreEqual("1|2|3", items.ToDelimitedString("|"));
+        }
+
+        [TestCase("7ad", 0)]
+        [TestCase("9a1", 0)]
+        [TestCase("8bw", 1)]
+        [TestCase("7cw", 2)]
+        [TestCase("9dd", -1)]
+        public void can_find_index_of_item_using_custom_delimiter(string find, int expectedIndex)
+        {
+            var items = new[] { "9a1", "9b2", "9c3", "9a4" };
+            Assert.AreEqual(expectedIndex, items.IndexOf(find, new SecondCharEqualityComparer()));
+        }
+
+        class SecondCharEqualityComparer : IEqualityComparer<string>
+        {
+            public bool Equals(string x, string y) => x[1] == y[1];
+            public int GetHashCode(string obj) => obj[1].GetHashCode();
+        }
+
         class TestData : IEquatable<TestData>
         {
             public readonly int Value;
@@ -111,13 +142,7 @@ namespace KickStart.Net.Tests.Extensions
             }
 
             public override bool Equals(object obj) => Equals(obj as TestData);
-
-            public bool Equals(TestData other)
-            {
-                if (other == null) return false;
-                return Value == other.Value;
-            }
-
+            public bool Equals(TestData other) => other != null && Value == other.Value;
             public override int GetHashCode() => Value;
         }
     }
