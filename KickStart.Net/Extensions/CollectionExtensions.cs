@@ -1,11 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace KickStart.Net.Extensions
 {
     public static class CollectionExtenions
     {
+        /// <summary>Finds the zero-based index of the <paramref name="item"/> within the <paramref name="list"/> using the supplied <see cref="EqualityComparer{T}"/></summary>
+        /// <returns>The index if the item was found, or -1 if the item cannot be found</returns>
+        public static int IndexOf<T>(this IList<T> list, T item, IEqualityComparer<T> equality) where T : class
+        {
+            if (list == null) throw new ArgumentNullException(nameof(list));
+            if (equality == null) throw new ArgumentNullException(nameof(equality));
+            Contract.EndContractBlock();
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (equality.Equals(item, list[i])) return i;
+            }
+            return -1;
+        }
+
+        /// <summary>Returns a string of the <paramref name="items"/> joined with the <paramref name="delimiter"/>, which defaults to a comma</summary>
+        public static string ToDelimitedString<T>(this IEnumerable<T> items, string delimiter = ",")
+        {
+            if (items == null) throw new ArgumentNullException(nameof(items));
+            Contract.EndContractBlock();
+
+            return string.Join(delimiter, items);
+        }
+
         /// <summary>
         /// Removes all the <paramref name="keys"/> from the <paramref name="dictionary"/>
         /// </summary>
@@ -25,6 +50,7 @@ namespace KickStart.Net.Extensions
         {
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
             if (keys == null) throw new ArgumentNullException(nameof(keys));
+            Contract.EndContractBlock();
             foreach (var key in keys)
             {
                 dictionary.Remove(key);
@@ -34,6 +60,7 @@ namespace KickStart.Net.Extensions
         public static void RemoveByValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TValue value, Func<TValue, TValue, bool> predicate = null)
         {
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            Contract.EndContractBlock();
             predicate = predicate ?? ((v1, v2) => v1.Equals(v2));
             var keysToRemove = (from kvp in dictionary where predicate(kvp.Value, value) select kvp.Key).ToList();
             dictionary.RemoveRange(keysToRemove);
@@ -45,6 +72,7 @@ namespace KickStart.Net.Extensions
         public static TValue GetOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue = default(TValue))
         {
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            Contract.EndContractBlock();
             TValue value;
             return dictionary.TryGetValue(key, out value) ? value : defaultValue;
         }
@@ -56,6 +84,7 @@ namespace KickStart.Net.Extensions
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> items)
         {
             if (items == null) throw new ArgumentNullException(nameof(items));
+            Contract.EndContractBlock();
             return new HashSet<T>(items);
         }
 
@@ -79,6 +108,7 @@ namespace KickStart.Net.Extensions
             if (collection == null) throw new ArgumentNullException(nameof(collection));
             if (collection.IsReadOnly) throw new ArgumentException("cannot modify a readonly collection", nameof(collection));
             if (items == null) throw new ArgumentNullException(nameof(items));
+            Contract.EndContractBlock();
 
             foreach (var item in items)
             {
@@ -106,6 +136,7 @@ namespace KickStart.Net.Extensions
             if (collection == null) throw new ArgumentNullException(nameof(collection));
             if (collection.IsReadOnly) throw new ArgumentException("cannot modify a readonly collection", nameof(collection));
             if (items == null) throw new ArgumentNullException(nameof(items));
+            Contract.EndContractBlock();
 
             foreach (var item in items)
             {
@@ -136,6 +167,7 @@ namespace KickStart.Net.Extensions
             if (list == null) throw new ArgumentNullException(nameof(list));
             if (list.IsReadOnly) throw new ArgumentException("cannot modify a readonly list", nameof(list));
             if (items == null) throw new ArgumentNullException(nameof(items));
+            Contract.EndContractBlock();
 
             foreach (var item in items)
             {

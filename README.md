@@ -7,12 +7,14 @@ KickStart is a collection of useful resuable functions which are too small to be
 ## KickStart.Net.dll
 
 ### CollectionExtensions
+* `AddRange` adds multiple items to a `ICollection<T>`
+* `SetRange` adds or replaces multiple items in a `ICollection<T>` or `IList<T>`
 * `RemoveRange` removes multiple keys from a dictionary
 * `RemoveByValue` removes keys from a dictionary by a value
 * `GetOrDefault` gets value from dictionary, returns the default value if key is not found
-* `AddRange` adds multiple items to a `ICollection<T>`
-* `SetRange` adds or replaces multiple items in a `ICollection<T>` or `IList<T>`
 * `ToHashSet` adds all the item in an `IEnumerable<T>` into a new `HashSet<T>`
+* `IndexOf` to find the index of an item in a list using an `IEqualityComparer<T>`
+* `ToDelimitedString()` to convert some items into a delmited string
 
 ### StreamExtensions
 * `ToStream` converts from `string` or `byte[]` into `stream`
