@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/mcai4gl2/KickStart.Net.svg)](https://travis-ci.org/mcai4gl2/KickStart.Net)
+[![NuGet Status](http://img.shields.io/nuget/v/KickStart.Net.svg?style=flat)](https://www.nuget.org/packages/KickStart.Net/)
 
 # KickStart.Net
 
