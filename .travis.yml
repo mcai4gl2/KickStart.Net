@@ -6,16 +6,17 @@ install:
 script:
   - xbuild /p:Configuration=Release /p:VbcToolExe=vbnc.exe KickStart.Net.sln
   - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./KickStart.Net.Tests/bin/Release/KickStart.Net.Tests.dll
+  - export ASSEMBLY_VERSION=$(monodis --assembly ./KickStart.Net/bin/Release/KickStart.Net.dll | grep Version | egrep -o '[0-9]+\.[0-9]+\.[0-9]+')
 deploy:
   - provider: script
     skip_cleanup: true
     script:
-      - cd KickStart.Net && nuget pack KickStart.Net.nuspec -Version $(monodis --assembly ./KickStart.Net/bin/Release/KickStart.Net.dll | grep Version | egrep -o '[0-9]+\.[0-9]+\.[0-9]+').$TRAVIS_BUILD_NUMBER-stable -IncludeReferencedProjects -Prop Configuration=Release && nuget push *.nupkg $NUGET_API_KEY -verbosity detailed
+      - cd KickStart.Net && nuget pack KickStart.Net.nuspec -Version $ASSEMBLY_VERSION.$TRAVIS_BUILD_NUMBER-stable -IncludeReferencedProjects -Prop Configuration=Release && nuget push *.nupkg $NUGET_API_KEY -verbosity detailed
     on:
       branch: master
   - provider: script
     skip_cleanup: true
     script:
-      - cd KickStart.Net && nuget pack KickStart.Net.nuspec -Version $(monodis --assembly ./KickStart.Net/bin/Release/KickStart.Net.dll | grep Version | egrep -o '[0-9]+\.[0-9]+\.[0-9]+').$TRAVIS_BUILD_NUMBER -IncludeReferencedProjects -Prop Configuration=Release && nuget push *.nupkg $NUGET_API_KEY -verbosity detailed
+      - cd KickStart.Net && nuget pack KickStart.Net.nuspec -Version $ASSEMBLY_VERSION.$TRAVIS_BUILD_NUMBER -IncludeReferencedProjects -Prop Configuration=Release && nuget push *.nupkg $NUGET_API_KEY -verbosity detailed
     on:
       tags: true
