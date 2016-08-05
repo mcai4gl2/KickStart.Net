@@ -31,6 +31,12 @@ namespace KickStart.Net.Extensions
             return string.Join(delimiter, items);
         }
 
+        public static IDictionary<TKey, TValue> IndexBy<TKey, TValue>(this IEnumerable<TValue> items,
+            Func<TValue, TKey> keySelector)
+        {
+            return items.ToDictionary(keySelector, i => i);
+        } 
+
         /// <summary>
         /// Removes all the <paramref name="keys"/> from the <paramref name="dictionary"/>
         /// </summary>
@@ -178,6 +184,17 @@ namespace KickStart.Net.Extensions
                     list.Add(item);
             }
         }
-        
+
+        public static IEnumerable<TValue> Override<TKey, TValue>(this IEnumerable<TValue> @base, IEnumerable<TValue> @override,
+            Func<TValue, TKey> keySelector)
+        {
+            var byId = @override.IndexBy(keySelector);
+            return @base.Select(b => byId.ContainsKey(keySelector(b)) ? byId[keySelector(b)] : b);
+        }
+
+        public static IEnumerable<TValue> Override<TKey, TValue>(this IEnumerable<TValue> @base, Func<TValue, TKey> keySelector, params TValue[] @override)
+        {
+            return Override(@base, @override, keySelector);
+        }
     }
 }

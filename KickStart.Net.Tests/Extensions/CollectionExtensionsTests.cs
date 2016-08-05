@@ -2,6 +2,7 @@
 using KickStart.Net.Extensions;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace KickStart.Net.Tests.Extensions
 {
@@ -9,6 +10,34 @@ namespace KickStart.Net.Tests.Extensions
     public class CollectionExtensionsTests
     {
         private readonly Dictionary<int, int> _emptyDict = new Dictionary<int, int>();
+
+        [Test]
+        public void Override_without_any_overrides()
+        {
+            var input = new[] { 1, 2, 3 }.Select(v => new { Id = v, Value = v + 1 });
+            var output = input.Override(i => i.Id);
+            Assert.AreEqual(input, output);
+        }
+
+        [Test]
+        public void Override_with_one_value()
+        {
+            var input = new[] {1, 2, 3}.Select(v => new {Id = v, Value = v + 1});
+            var output = input.Override(i => i.Id, new {Id = 1, Value = 3});
+            Assert.AreEqual(new[] {new {Id = 1, Value = 3},
+                                   new {Id = 2, Value = 3},
+                                   new {Id = 3, Value = 4}}, output);
+        }
+
+        [Test]
+        public void test_index_by()
+        {
+            var input = new[] {1, 2, 3}.Select(v => new {Id = v, Value = v + 1});
+            var byId = input.IndexBy(i => i.Id);
+            Assert.AreEqual(new {Id = 1, Value = 2}, byId[1]);
+            Assert.AreEqual(new {Id = 2, Value = 3}, byId[2]);
+            Assert.AreEqual(new {Id = 3, Value = 4}, byId[3]);
+        }
 
         [Test]
         public void test_remove_range_with_params()
