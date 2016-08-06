@@ -138,6 +138,13 @@ namespace KickStart.Net.Tests.Extensions
         }
 
         [Test]
+        public void delimited_string_can_skip_nulls()
+        {
+            var items = new int?[] { 1, 2, 3, null, 4 };
+            Assert.AreEqual("1,2,3,4", items.ToDelimitedStringSkipNulls());
+        }
+
+        [Test]
         public void can_create_delimited_string_using_custom_delimiter()
         {
             var items = new[] { 1, 2, 3 };

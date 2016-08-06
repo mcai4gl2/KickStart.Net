@@ -31,6 +31,15 @@ namespace KickStart.Net.Extensions
             return string.Join(delimiter, items);
         }
 
+        /// <summary>Same as ToDelimitedString but skip null values</summary>
+        public static string ToDelimitedStringSkipNulls<T>(this IEnumerable<T> items, string delimiter = ",")
+        {
+            if (items == null) throw new ArgumentNullException(nameof(items));
+            Contract.EndContractBlock();
+
+            return string.Join(delimiter, items.Where(i => i != null));
+        }
+
         public static IDictionary<TKey, TValue> IndexBy<TKey, TValue>(this IEnumerable<TValue> items,
             Func<TValue, TKey> keySelector)
         {
