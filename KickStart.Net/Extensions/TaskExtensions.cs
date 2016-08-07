@@ -49,5 +49,15 @@ namespace KickStart.Net.Extensions
         {
             return Task.WhenAny(task, Task.Delay(timeoutInMillisec).ContinueWith(_ => callback())).Unwrap();
         }
+
+        /// <summary>
+        /// Intentionally not waiting for a task to complete
+        /// </summary>
+        /// <param name="task">The task we don't want to wait</param>
+        /// <remarks>This indicates we intentionally don't want to wait a task</remarks>
+        public static void DontWait(this Task task)
+        {
+            GC.KeepAlive(task);
+        }
     }
 }
