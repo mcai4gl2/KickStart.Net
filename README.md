@@ -15,7 +15,8 @@ KickStart is a collection of useful resuable functions which are too small to be
 * `GetOrDefault` gets value from dictionary, returns the default value if key is not found
 * `ToHashSet` adds all the item in an `IEnumerable<T>` into a new `HashSet<T>`
 * `IndexOf` to find the index of an item in a list using an `IEqualityComparer<T>`
-* `ToDelimitedString()` to convert some items into a delmited string
+* `ToDelimitedString` to convert some items into a delmited string
+* `IndexBy` to convert `IEnumerable<T>` into a new `Dictionary<K, T>` keyed by key selector `Func<T, K>`
 
 ### StreamExtensions
 * `ToStream` converts from `string` or `byte[]` into `stream`
@@ -24,5 +25,10 @@ KickStart is a collection of useful resuable functions which are too small to be
 ### PrintExtensions
 * `Print` or `P` to print out the object in console
 
-## Diagnostic
+### TaskExtensions
+* `ToListAsync` awaits a task which returns `IEnumerable<T>` and returns `List<T>`
+* `TimeoutAfter` awaits a task to return or timeout passed
+* `DontWait` indicates don't wait for completion of the task is intentionally
+
+### Diagnostic
 * `Trace.Here()` returns a trace object which contains the line number, method name and file name where the method is called
