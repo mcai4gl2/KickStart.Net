@@ -72,5 +72,14 @@ namespace KickStart.Net.Tests.Extensions
             });
             Assert.AreEqual(2, result);
         }
+
+        [Test]
+        public async Task can_ignore_cancellation_exception()
+        {
+            var cts = new CancellationTokenSource();
+            cts.Cancel();
+            Assert.Throws<TaskCanceledException>(async () => await Task.Delay(100, cts.Token));
+            await Task.Delay(100, cts.Token).ContinueWhenCancelled();
+        }
     }
 }

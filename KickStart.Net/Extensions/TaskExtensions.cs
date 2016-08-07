@@ -59,5 +59,15 @@ namespace KickStart.Net.Extensions
         {
             GC.KeepAlive(task);
         }
+
+        private static Action<Task> _doNothing = _ => { };
+
+        /// <summary>
+        /// Ignore the TaskCancelledException when the input task is cancelled
+        /// </summary>
+        public static Task ContinueWhenCancelled(this Task task)
+        {
+            return task.ContinueWith(_doNothing, TaskContinuationOptions.OnlyOnCanceled);
+        } 
     }
 }

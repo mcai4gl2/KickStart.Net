@@ -29,6 +29,7 @@ KickStart is a collection of useful resuable functions which are too small to be
 * `ToListAsync` awaits a task which returns `IEnumerable<T>` and returns `List<T>`
 * `TimeoutAfter` awaits a task to return or timeout passed
 * `DontWait` indicates don't wait for completion of the task is intentionally
+* `ContinueWhenCancelled` ignores `TaskCancelledException` when task is cancelled 
 
 ### Diagnostic
 * `Trace.Here()` returns a trace object which contains the line number, method name and file name where the method is called
