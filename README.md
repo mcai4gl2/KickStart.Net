@@ -20,6 +20,8 @@ KickStart is a collection of useful resuable functions which are too small to be
 * `IndexOf` to find the index of an item in a list using an `IEqualityComparer<T>`
 * `ToDelimitedString` to convert some items into a delmited string
 * `IndexBy` to convert `IEnumerable<T>` into a new `Dictionary<K, T>` keyed by key selector `Func<T, K>`
+* `IsEmpty` and `IsNotEmpty` checks if a `IList` is empty or not
+* `Split` splits a `IList` based on a `Predicate` 
 
 ### StreamExtensions
 * `ToStream` converts from `string` or `byte[]` into `stream`
@@ -40,3 +42,6 @@ KickStart is a collection of useful resuable functions which are too small to be
 
 ### Diagnostic
 * `Trace.Here()` returns a trace object which contains the line number, method name and file name where the method is called
+
+### Cache
+A port of Guava Cache into C#.
