@@ -31,5 +31,9 @@ KickStart is a collection of useful resuable functions which are too small to be
 * `DontWait` indicates don't wait for completion of the task is intentionally
 * `ContinueWhenCancelled` ignores `TaskCancelledException` when task is cancelled 
 
+### HttpMessageExtensions
+* `WithContent` adds request content to a `HttpRequestMessage`
+* `ContentAsStream` reads response content from `HttpResponseMessage` and return as `Stream`
+
 ### Diagnostic
 * `Trace.Here()` returns a trace object which contains the line number, method name and file name where the method is called
