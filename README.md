@@ -7,6 +7,9 @@ KickStart is a collection of useful resuable functions which are too small to be
 
 ## KickStart.Net.dll
 
+* `Objects.GetHashCode` a port of Guava's `MoreObjects.HashCode` which generates a hash code for multiple values
+* `Objects.ToStringHelper` a port of Guava's `MoreObjects.ToStringHelper` which is helpful to implement `ToString` method 
+
 ### CollectionExtensions
 * `AddRange` adds multiple items to a `ICollection<T>`
 * `SetRange` adds or replaces multiple items in a `ICollection<T>` or `IList<T>`
@@ -30,6 +33,10 @@ KickStart is a collection of useful resuable functions which are too small to be
 * `TimeoutAfter` awaits a task to return or timeout passed
 * `DontWait` indicates don't wait for completion of the task is intentionally
 * `ContinueWhenCancelled` ignores `TaskCancelledException` when task is cancelled 
+
+### HttpMessageExtensions
+* `WithContent` adds request content to a `HttpRequestMessage`
+* `ContentAsStream` reads response content from `HttpResponseMessage` and return as `Stream`
 
 ### Diagnostic
 * `Trace.Here()` returns a trace object which contains the line number, method name and file name where the method is called
