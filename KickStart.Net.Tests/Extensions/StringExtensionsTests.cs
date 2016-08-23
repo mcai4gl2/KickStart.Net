@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KickStart.Net.Extensions;
+﻿using KickStart.Net.Extensions;
 using NUnit.Framework;
 
 namespace KickStart.Net.Tests.Extensions
@@ -15,6 +10,12 @@ namespace KickStart.Net.Tests.Extensions
         public void join_can_skip_nulls()
         {
             Assert.AreEqual("1,2,3,4", ",".JoinSkipNulls("", null, "1", "2", "", "3", "4"));
+        }
+
+        [Test]
+        public void can_join()
+        {
+            Assert.AreEqual("1,2,3,,4,", ",".Joins("1", "2", "3", null, "4", ""));
         }
     }
 }

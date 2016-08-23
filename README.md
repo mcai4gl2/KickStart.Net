@@ -7,6 +7,9 @@ KickStart is a collection of useful resuable functions which are too small to be
 
 ## KickStart.Net.dll
 
+* `Objects.GetHashCode` a port of Guava's `MoreObjects.HashCode` which generates a hash code for multiple values
+* `Objects.ToStringHelper` a port of Guava's `MoreObjects.ToStringHelper` which is helpful to implement `ToString` method 
+
 ### CollectionExtensions
 * `AddRange` adds multiple items to a `ICollection<T>`
 * `SetRange` adds or replaces multiple items in a `ICollection<T>` or `IList<T>`
