@@ -26,5 +26,27 @@ namespace KickStart.Net.Extensions
         {
             return Task.Delay(millisecs).GetAwaiter();
         }
+
+        public static IEnumerable<int> Range(this int toNumberExclusive)
+        {
+            return Enumerable.Range(0, toNumberExclusive);
+        } 
+
+        /// <summary>
+        /// Returns the int nearest in value to long value.
+        /// </summary>
+        /// <remarks>Ported from Guava Ints.saturatedCast</remarks>
+        public static int SaturatedCast(this long value)
+        {
+            if (value > int.MaxValue)
+            {
+                return int.MaxValue;
+            }
+            if (value < int.MinValue)
+            {
+                return int.MinValue;
+            }
+            return (int) value;
+        }
     }
 }

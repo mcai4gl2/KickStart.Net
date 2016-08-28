@@ -3,7 +3,7 @@
 
 # KickStart.Net
 
-KickStart is a collection of useful resuable functions which are too small to be have its own library.
+KickStart is a collection of useful reusable functions which are too small to be have its own library.
 
 ## KickStart.Net.dll
 
@@ -18,7 +18,7 @@ KickStart is a collection of useful resuable functions which are too small to be
 * `GetOrDefault` gets value from dictionary, returns the default value if key is not found
 * `ToHashSet` adds all the item in an `IEnumerable<T>` into a new `HashSet<T>`
 * `IndexOf` to find the index of an item in a list using an `IEqualityComparer<T>`
-* `ToDelimitedString` to convert some items into a delmited string
+* `ToDelimitedString` to convert some items into a delimited string
 * `IndexBy` to convert `IEnumerable<T>` into a new `Dictionary<K, T>` keyed by key selector `Func<T, K>`
 * `IsEmpty` and `IsNotEmpty` checks if a `IList` is empty or not
 * `Split` splits a `IList` based on a `Predicate` 
