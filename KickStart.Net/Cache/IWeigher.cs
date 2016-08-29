@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KickStart.Net.Cache
+﻿namespace KickStart.Net.Cache
 {
     public interface IWeigher<K, V>
     {
@@ -19,7 +13,7 @@ namespace KickStart.Net.Cache
         } 
     }
 
-    public class OneWeigher<K, V> : IWeigher<K, V>
+    class OneWeigher<K, V> : IWeigher<K, V>
     {
         public int Weigh(K key, V value)
         {

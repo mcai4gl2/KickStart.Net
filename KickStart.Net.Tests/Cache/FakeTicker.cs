@@ -1,4 +1,5 @@
-﻿using KickStart.Net.Cache;
+﻿using System;
+using KickStart.Net.Cache;
 
 namespace KickStart.Net.Tests.Cache
 {
@@ -10,6 +11,12 @@ namespace KickStart.Net.Tests.Cache
         public FakeTicker Advance(long time)
         {
             _adder.Add(time);
+            return this;
+        }
+
+        public FakeTicker Advance(TimeSpan timeSpan)
+        {
+            _adder.Add(timeSpan.Ticks);
             return this;
         }
 

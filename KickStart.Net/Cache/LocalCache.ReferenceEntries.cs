@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using KickStart.Net.Extensions;
 
 namespace KickStart.Net.Cache
 {

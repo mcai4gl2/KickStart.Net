@@ -211,7 +211,7 @@ namespace KickStart.Net.Cache
             {
                 var nullEntry = new NullReferenceEntry<K, V>();
                 nulled.NextInWriteQueue = nullEntry;
-                nulled.PreviousInAccessQueue = nullEntry;
+                nulled.PreviousInWriteQueue = nullEntry;
             }
         }
 

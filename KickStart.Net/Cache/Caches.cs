@@ -6,7 +6,8 @@ namespace KickStart.Net.Cache
 {
     class LocalManualCache<K, V> : ICache<K, V>
     {
-        protected readonly LocalCache<K, V> _localCache;
+        [VisibleForTesting]
+        internal readonly LocalCache<K, V> _localCache;
 
         public LocalManualCache(CacheBuilder<K, V> builder)
         {

@@ -42,6 +42,7 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes.cs" />
     <Compile Include="Cache\AbstractCache.cs" />
     <Compile Include="Cache\AbstractLoadingCache.cs" />
     <Compile Include="Cache\CacheBuilder.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Tasks.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Cache\README.md" />
     <None Include="KickStart.Net.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 
 namespace KickStart.Net.Cache
@@ -22,6 +19,11 @@ namespace KickStart.Net.Cache
         public static IRemovalListener<K, V> Null<K, V>()
         {
             return new NullRemovalListener<K, V>();
+        }
+
+        public static IRemovalListener<K, V> Forwarding<K, V>(Action<RemovalNotification<K, V>> listener)
+        {
+            return new ForwardingRemovalListener<K, V>(listener);
         } 
     }
 
@@ -42,6 +44,22 @@ namespace KickStart.Net.Cache
         public void OnRemoval(RemovalNotification<K, V> notification)
         {
             Task.Factory.StartNew(() => _listener.OnRemoval(notification));
+        }
+    }
+
+    class ForwardingRemovalListener<K, V> : IRemovalListener<K, V>
+    {
+        private readonly Action<RemovalNotification<K, V>> _listener;
+
+        public ForwardingRemovalListener(Action<RemovalNotification<K, V>> listener)
+        {
+            Contract.Assert(listener != null);
+            _listener = listener;
+        } 
+
+        public void OnRemoval(RemovalNotification<K, V> notification)
+        {
+            _listener(notification);
         }
     }
 }

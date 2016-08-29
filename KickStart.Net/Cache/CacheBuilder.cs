@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KickStart.Net.Cache
 {
@@ -82,7 +77,7 @@ namespace KickStart.Net.Cache
 
         public long MaximumWeight => _weighter == null ? _maximumSize : _maximumWeight;
 
-        public IWeigher<K, V> Weighter => _weighter ?? new OneWeigher<K, V>();
+        public IWeigher<K, V> Weighter => _weighter ?? Weighers.One<K, V>();
 
         public CacheBuilder<K, V> WithExpireAfterWrite(long ticks)
         {
@@ -91,8 +86,11 @@ namespace KickStart.Net.Cache
             _expireAfterWriteTicks = ticks;
             return this;
         }
+
+        public CacheBuilder<K, V> WithExpireAfterWrite(TimeSpan timeSpan) => WithExpireAfterWrite(timeSpan.Ticks); 
         public long ExpireAfterWriteTicks => _expireAfterWriteTicks == UNSET_INT ? DEFAULT_EXPIRATION_MILLIS : _expireAfterWriteTicks;
 
+        public CacheBuilder<K, V> WithExpireAfterAccess(TimeSpan timeSpan) => WithExpireAfterAccess(timeSpan.Ticks);
         public CacheBuilder<K, V> WithExpireAfterAccess(long ticks)
         {
             Contract.Assert(_expireAfterAccessTicks == UNSET_INT);
@@ -110,6 +108,7 @@ namespace KickStart.Net.Cache
             return this;
         }
         public long RefreshAfterWrite => _refreshTicks == UNSET_INT ? DEFAULT_REFRESH_MILLIS : _refreshTicks;
+        public CacheBuilder<K, V> WithRefreshAfterWrite(TimeSpan timeSpan) => WithRefreshAfterWrite(timeSpan); 
 
         public CacheBuilder<K, V> WithTicker(ITicker ticker)
         {
@@ -132,7 +131,7 @@ namespace KickStart.Net.Cache
             _removalListener = listener;
             return this;
         }
-        public IRemovalListener<K, V> RemovalListener => _removalListener ?? new NullRemovalListener<K, V>();
+        public IRemovalListener<K, V> RemovalListener => _removalListener ?? RemovalListeners.Null<K, V>();
 
         public CacheBuilder<K, V> RecordStats()
         {

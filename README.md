@@ -44,4 +44,4 @@ KickStart is a collection of useful reusable functions which are too small to be
 * `Trace.Here()` returns a trace object which contains the line number, method name and file name where the method is called
 
 ### Cache
-A port of Guava Cache into C#.
+A port of Guava Cache into C#. More details at [here](KickStart.Net/Cache/README.md)

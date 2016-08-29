@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.ComponentModel;
 using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
@@ -70,6 +69,16 @@ namespace KickStart.Net.Cache
                 var value = valueReference.Value;
                 if ((value == null) && valueReference.IsActive()) return null; // value collected
                 var newEntry = CopyEntry(this, original, newNext);
+
+                newEntry.AccessTime = original.AccessTime;
+                Queues.ConnectAccessOrder(original.PreviousInAccessQueue, newEntry);
+                Queues.ConnectAccessOrder(newEntry, original.NextInAccessQueue);
+                Queues.NullifyAccessOrder(original);
+                newEntry.WriteTime = original.WriteTime;
+                Queues.ConnectWriteOrder(original.PreviousInWriteQueue, newEntry);
+                Queues.ConnectWriteOrder(newEntry, original.NextInWriteQueue);
+                Queues.NullifyWriteOrder(original);
+
                 newEntry.ValueReference = valueReference.Copy(value, newEntry);
                 return newEntry;
             }
@@ -254,7 +263,6 @@ namespace KickStart.Net.Cache
 
             V WaitForLoadingValue(IReferenceEntry<K, V> e, K key, IValueReference<K, V> valueReference)
             {
-                Contract.Assert(!valueReference.IsLoading());
                 try
                 {
                     var value = valueReference.WaitForValue().Result;
@@ -272,7 +280,7 @@ namespace KickStart.Net.Cache
 
             V ScheduleRefresh(IReferenceEntry<K, V> entry, K key, int hash, V oldValue, long now, ICacheLoader<K, V> loader)
             {
-                if ((now - entry.WriteTime) > _map._refreshTicks && !entry.ValueReference.IsLoading())
+                if (_map.Refreshes() && (now - entry.WriteTime) > _map._refreshTicks && !entry.ValueReference.IsLoading())
                 {
                     var newValue = Refresh(key, hash, loader, true);
                     if (newValue != null)
@@ -973,9 +981,11 @@ namespace KickStart.Net.Cache
             {
                 DrainRecencyQueue();
                 _totalWeight += weight;
-
-                entry.AccessTime = now;
-                entry.WriteTime = now;
+                
+                if (_map.RecordsAccess())
+                    entry.AccessTime = now;
+                if (_map.RecordsWrite())
+                    entry.WriteTime = now;
                 _accessQueue.Offer(entry);
                 _writeQueue.Offer(entry);
             }
@@ -1034,7 +1044,8 @@ namespace KickStart.Net.Cache
                 if (e == null) return null;
                 if (_map.IsExpired(e, now))
                 {
-
+                    TryExpireEntries(now);
+                    return null;
                 }
                 return e;
             }
@@ -1090,7 +1101,8 @@ namespace KickStart.Net.Cache
                 }
             }
 
-            void ExpireEntries(long now)
+            [VisibleForTesting]
+            internal void ExpireEntries(long now)
             {
                 DrainRecencyQueue();
 

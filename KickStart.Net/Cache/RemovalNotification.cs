@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KickStart.Net.Cache
+﻿namespace KickStart.Net.Cache
 {
     public class RemovalNotification<K, V>
     {
-        private readonly K _key;
-        private readonly V _value;
-        private RemovalCause Cause { get; }
+        public K Key { get; }
+        public V Value { get; }
+        public RemovalCause Cause { get; }
 
         private RemovalNotification(K key, V value, RemovalCause cause)
         {
-            _key = key;
-            _value = value;
+            Key = key;
+            Value = value;
             Cause = cause;
         } 
 

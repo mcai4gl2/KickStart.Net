@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NSubstitute, Version=1.10.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.1.10.0.0\lib\net45\NSubstitute.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
@@ -44,12 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\CacheExpirationTests.cs" />
     <Compile Include="Cache\CacheManualTests.cs" />
     <Compile Include="Cache\FakeTicker.cs" />
     <Compile Include="Cache\SimpleStatsTests.cs" />
     <Compile Include="Diagnostic\TraceTests.cs" />
-    <Compile Include="Extensions\CacheLoadingTests.cs" />
-    <Compile Include="Extensions\CacheStatsTests.cs" />
+    <Compile Include="Cache\CacheLoadingTests.cs" />
+    <Compile Include="Cache\CacheStatsTests.cs" />
     <Compile Include="Extensions\CollectionExtensionsTests.cs" />
     <Compile Include="Extensions\NumberExtensionsTests.cs" />
     <Compile Include="Extensions\PrintExtensionsTests.cs" />
