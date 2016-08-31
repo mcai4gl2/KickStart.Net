@@ -148,7 +148,7 @@ namespace KickStart.Net.Cache
 
         public ILoadingCache<K, V> Build(ICacheLoader<K, V> loader)
         {
-            Contract.Assert((_weighter == null && _maximumWeight == UNSET_INT) || (_weighter != null && _maximumWeight == UNSET_INT));
+            Contract.Assert((_weighter == null && _maximumWeight == UNSET_INT) || (_weighter != null && _maximumWeight != UNSET_INT));
             return new LocalLoadingCache<K, V>(this, loader);
         }
     }

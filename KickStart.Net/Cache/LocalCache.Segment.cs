@@ -28,6 +28,9 @@ namespace KickStart.Net.Cache
             public IReferenceEntry<K, V>[] Table => _table;
             public IStatsCounter StatsCounter => _statsCounter;
 
+            [VisibleForTesting]
+            internal long MaxSegmentWeight => _maxSegmentWeight;
+
             public Segment(LocalCache<K, V> map, int initialCapacity, long maxSegmentWeight, IStatsCounter statsCounter)
             {
                 _map = map;
@@ -88,7 +91,7 @@ namespace KickStart.Net.Cache
                 var previous = entry.ValueReference;
                 int weight = _map._weigher.Weigh(key, value);
                 Contract.Assert(weight >= 0);
-                var valueReference = new StrongValueReference<K, V>(value); // Only use strong reference for now, not even weighted one
+                var valueReference = weight == 1 ? new StrongValueReference<K, V>(value) : new WeightedStrongValueReference<K, V>(value, weight); // Only use strong reference for now, not even weighted one
                 entry.ValueReference = valueReference;
                 RecordWrite(entry, weight, now);
                 previous.NotifyNewValue(value);

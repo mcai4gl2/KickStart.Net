@@ -92,7 +92,7 @@ namespace KickStart.Net.Cache
             public AccessEnumerator(IReferenceEntry<K, V> head, IReferenceEntry<K, V> start)
             {
                 _head = head;
-                _next = _start;
+                _next = start;
             }
 
             public void Dispose()
@@ -103,7 +103,7 @@ namespace KickStart.Net.Cache
             public bool MoveNext()
             {
                 _next = _next.NextInAccessQueue;
-                return _next == _head;
+                return _next != _head;
             }
 
             public void Reset()

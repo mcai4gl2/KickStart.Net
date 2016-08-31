@@ -263,7 +263,7 @@ namespace KickStart.Net.Cache
         }
     }
 
-    class WeightedStrongValueReference<K, V> : StrongValueReference<K, V> where V : class
+    class WeightedStrongValueReference<K, V> : StrongValueReference<K, V>
     {
         public WeightedStrongValueReference(V referent, int weight)
             : base(referent)

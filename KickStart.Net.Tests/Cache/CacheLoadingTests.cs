@@ -116,7 +116,8 @@ namespace KickStart.Net.Tests.Extensions
             var one = new object();
             var two = new object();
             var ticker = new FakeTicker();
-            var loader = new DelegatingCacheLoader<object, object>(_ => Task.FromResult(one), (k, o) => Task.FromResult(two));
+            var loader = new DelegatingCacheLoader<object, object>(_ => Task.Delay(100).ContinueWith(t => Task.FromResult(one)).Unwrap(), 
+                                                                   (k, o) => Task.Delay(100).ContinueWith(t => Task.FromResult(two)).Unwrap());
             var cache = CacheBuilder<object, object>.NewBuilder()
                 .RecordStats()
                 .WithTicker(ticker)
@@ -172,7 +173,7 @@ namespace KickStart.Net.Tests.Extensions
             var one = new object();
             var two = new object();
             var ticker = new FakeTicker();
-            var loader = new DelegatingCacheLoader<object, object>(_ => Task.FromResult(one), (k, o) => Task.FromResult(two));
+            var loader = new DelegatingCacheLoader<object, object>(_ => Task.Delay(500).ContinueWith(t => Task.FromResult(one)).Unwrap(), (k, o) => Task.FromResult(two));
             var cache = CacheBuilder<object, object>.NewBuilder()
                 .RecordStats()
                 .WithTicker(ticker)
