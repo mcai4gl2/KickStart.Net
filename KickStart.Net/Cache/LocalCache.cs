@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -7,7 +8,7 @@ using KickStart.Net.Extensions;
 
 namespace KickStart.Net.Cache
 {
-    partial class LocalCache<K, V>
+    partial class LocalCache<K, V> : IEnumerable<KeyValuePair<K, V>>
     {
         private static readonly int UNSET_INT = -1;
 
@@ -95,6 +96,23 @@ namespace KickStart.Net.Cache
                     _segments[i] = CreateSegment(segmentSize, UNSET_INT, new SimpleStatsCounter());
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets the value from an entry. Returns null if the entry is invalid, partially-collected,
+        /// loading, or expired. Unlike the segment version, this method, does not attempt to cleanup 
+        /// stale entiries. It shall only be called outside of a segment during iterator iteration.
+        /// </summary>
+        V GetLiveValue(IReferenceEntry<K, V> entry, long now)
+        {
+            if (entry.Key == null)
+                return default(V);
+            var value = entry.ValueReference.Value;
+            if (value == null)
+                return default(V);
+            if (IsExpired(entry, now))
+                return default(V);
+            return value;
         }
 
         Segment<K, V>[] NewSegmentArray(int size)
@@ -450,6 +468,16 @@ namespace KickStart.Net.Cache
         {
             foreach (var key in keys)
                 Remove(key);
+        }
+
+        public IEnumerator<KeyValuePair<K, V>> GetEnumerator()
+        {
+            return new KeyValueEnumerator(this);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

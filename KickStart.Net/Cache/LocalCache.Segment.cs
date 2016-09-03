@@ -29,6 +29,12 @@ namespace KickStart.Net.Cache
             public IStatsCounter StatsCounter => _statsCounter;
 
             [VisibleForTesting]
+            internal AccessQueue<K, V> AccessQueue => _accessQueue;
+
+            [VisibleForTesting]
+            internal WriteQueue<K, V> WriteQueue => _writeQueue;
+
+            [VisibleForTesting]
             internal long MaxSegmentWeight => _maxSegmentWeight;
 
             public Segment(LocalCache<K, V> map, int initialCapacity, long maxSegmentWeight, IStatsCounter statsCounter)
@@ -251,7 +257,7 @@ namespace KickStart.Net.Cache
                 }
             }
 
-            void PostReadCleanup()
+            internal void PostReadCleanup()
             {
                 if ((Interlocked.Increment(ref _readCount) & _map._drainThreshold) == 0)
                     CleanUp();
@@ -1005,7 +1011,8 @@ namespace KickStart.Net.Cache
                 _accessQueue.Offer(entry);
             }
 
-            void DrainRecencyQueue()
+            [VisibleForTesting]
+            internal void DrainRecencyQueue()
             {
                 IReferenceEntry<K, V> entry;
                 while (_recencyQueue.TryDequeue(out entry))

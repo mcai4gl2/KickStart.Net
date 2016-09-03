@@ -8,12 +8,15 @@ The following features in Guava cache are not supported currently:
 * Cache serialization is not supported in this version.
 
 ## Example Usage
-Creating a non-loading cache:
 ```C#
 var cache = CacheBuilder<string, string>.NewBuilder()
                 .WithExpireAfterAccess(TimeSpan.FromMilliseconds(1))
                 .WithTicker(ticker)
                 .WithRemovalListener(removalListener)
                 .RecordStats()
-                .Build();
+                .Build(customLoader);
 ```
+
+## Internals
+
+## Future Enhancements

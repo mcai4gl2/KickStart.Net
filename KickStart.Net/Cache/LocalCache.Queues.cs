@@ -6,7 +6,8 @@ namespace KickStart.Net.Cache
 {
     partial class LocalCache<K, V>
     {
-        class AccessQueue<K, V> : IEnumerable<IReferenceEntry<K, V>>
+        [VisibleForTesting]
+        internal class AccessQueue<K, V> : IEnumerable<IReferenceEntry<K, V>>
         {
             readonly IReferenceEntry<K, V> _head = new AccessReferenceEntry<K, V>();
 
@@ -74,7 +75,7 @@ namespace KickStart.Net.Cache
 
             public IEnumerator<IReferenceEntry<K, V>> GetEnumerator()
             {
-                return new AccessEnumerator<K, V>(_head, Peek());
+                return new AccessEnumerator<K, V>(_head, _head);
             }
 
             IEnumerator IEnumerable.GetEnumerator()
@@ -119,7 +120,8 @@ namespace KickStart.Net.Cache
             }
         }
 
-        class WriteQueue<K, V>
+        [VisibleForTesting]
+        internal class WriteQueue<K, V>
         {
             readonly IReferenceEntry<K, V> _head = new WriteReferenceEntry<K, V>();
 

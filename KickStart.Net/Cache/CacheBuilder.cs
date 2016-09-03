@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using NUnit.Framework;
 
 namespace KickStart.Net.Cache
 {
@@ -123,6 +124,13 @@ namespace KickStart.Net.Cache
             if (_ticker != null) return _ticker;
             return recordsTime ? new DateTimeTicker() : (ITicker) new NullTicker();
         }
+
+        public CacheBuilder<K, V> RecordTime()
+        {
+            Contract.Assert(_ticker == null);
+            _ticker = new DateTimeTicker();
+            return this;
+        } 
 
         public CacheBuilder<K, V> WithRemovalListener(IRemovalListener<K, V> listener)
         {

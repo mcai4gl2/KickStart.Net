@@ -54,9 +54,18 @@
     <Compile Include="Cache\IRemovalListener.cs" />
     <Compile Include="Cache\ITicker.cs" />
     <Compile Include="Cache\LocalCache.cs" />
-    <Compile Include="Cache\LocalCache.Queues.cs" />
-    <Compile Include="Cache\LocalCache.ReferenceEntries.cs" />
-    <Compile Include="Cache\LocalCache.Segment.cs" />
+    <Compile Include="Cache\LocalCache.Iterators.cs">
+		<DependentUpon>LocalCache.cs</DependentUpon>
+	</Compile>
+    <Compile Include="Cache\LocalCache.Queues.cs">
+		<DependentUpon>LocalCache.cs</DependentUpon>
+	</Compile>
+    <Compile Include="Cache\LocalCache.ReferenceEntries.cs">
+		<DependentUpon>LocalCache.cs</DependentUpon>
+	</Compile>
+    <Compile Include="Cache\LocalCache.Segment.cs">
+		<DependentUpon>LocalCache.cs</DependentUpon>
+	</Compile>
     <Compile Include="Cache\LongAddable.cs" />
     <Compile Include="Cache\LongAdder.cs" />
     <Compile Include="Cache\RemovalCause.cs" />

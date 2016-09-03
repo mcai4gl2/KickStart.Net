@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 
 namespace KickStart.Net.Cache
 {
@@ -68,7 +69,7 @@ namespace KickStart.Net.Cache
 
         public IReadOnlyDictionary<K, V> AsMap()
         {
-            throw new NotImplementedException();
+            return _localCache.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
 
         public void CleanUp()
