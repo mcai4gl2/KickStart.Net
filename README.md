@@ -22,6 +22,8 @@ KickStart is a collection of useful reusable functions which are too small to be
 * `IndexBy` to convert `IEnumerable<T>` into a new `Dictionary<K, T>` keyed by key selector `Func<T, K>`
 * `IsEmpty` and `IsNotEmpty` checks if a `IList` is empty or not
 * `Split` splits a `IList` based on a `Predicate` 
+* `All<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)` extends `All` to access index
+* `Any<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)` extends `Any` to access index
 
 ### StreamExtensions
 * `ToStream` converts from `string` or `byte[]` into `stream`
@@ -45,3 +47,11 @@ KickStart is a collection of useful reusable functions which are too small to be
 
 ### Cache
 A port of Guava Cache into C#. More details at [here](KickStart.Net/Cache/README.md)
+
+### Combinations
+
+* `Collections.Combinations` generates cartesian product based on inputs, e.g.:
+    ```C#
+    var combinations = new Combinations<int>(new[] {1, 2, 3}, new[] {2, 3, 4});
+    /// Generates list of: [[1,2],[1,3],[1,4],[2,2],[2,3],[2,4],[3,2],[3,3],[3,4]]
+    ```

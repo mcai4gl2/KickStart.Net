@@ -67,7 +67,7 @@ namespace KickStart.Net.Cache
             return _localCache.LongSize();
         }
 
-        public IReadOnlyDictionary<K, V> AsMap()
+        public IReadOnlyDictionary<K, V> ToDictionary()
         {
             return _localCache.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
@@ -85,6 +85,31 @@ namespace KickStart.Net.Cache
                 aggregator.IncrementBy(segment.StatsCounter);
             return aggregator.Snapshot();
         }
+
+        public bool ContainsKey(K key)
+        {
+            return _localCache.ContainsKey(key);
+        }
+
+        public bool ContainsValue(V value)
+        {
+            return _localCache.ContainsValue(value);
+        }
+
+        public bool IsEmpty()
+        {
+            return _localCache.IsEmpty();
+        }
+
+        public V Remove(K key)
+        {
+            return _localCache.Remove(key);
+        }
+
+        public bool Remove(K key, V value)
+        {
+            return _localCache.Remove(key, value);
+        }
     }
 
     class LocalLoadingCache<K, V> : LocalManualCache<K, V>, ILoadingCache<K, V>
@@ -96,6 +121,8 @@ namespace KickStart.Net.Cache
 
         public V Get(K key)
         {
+            if (key == null) 
+                throw new NullReferenceException($"key cannot be null");
             return _localCache.GetOrLoad(key);
         }
 

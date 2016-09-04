@@ -240,7 +240,7 @@ namespace KickStart.Net.Tests.Cache
             {
                 cache.Get(i);
             }
-            var keys = cache.AsMap().Keys.ToList();
+            var keys = cache.ToDictionary().Keys.ToList();
             Assert.AreEqual(10, keys.Count);
             Assert.AreEqual(new SortedSet<int?>(((int?)10).Range()), new SortedSet<int?>(keys));
 
@@ -253,7 +253,7 @@ namespace KickStart.Net.Tests.Cache
             cache.Get(11);
             cache.Get(12);
 
-            keys = cache.AsMap().Keys.ToList();
+            keys = cache.ToDictionary().Keys.ToList();
             Assert.AreEqual(10, keys.Count);
             Assert.IsFalse(keys.Contains(3));
             Assert.IsFalse(keys.Contains(4));
@@ -268,7 +268,7 @@ namespace KickStart.Net.Tests.Cache
             cache.Get(14);
             cache.Get(15);
 
-            keys = cache.AsMap().Keys.ToList();
+            keys = cache.ToDictionary().Keys.ToList();
             Assert.AreEqual(10, keys.Count);
             Assert.IsFalse(keys.Contains(9));
             Assert.IsFalse(keys.Contains(0));
@@ -291,7 +291,7 @@ namespace KickStart.Net.Tests.Cache
             {
                 cache.Get(i);
             }
-            var keys = cache.AsMap().Keys.ToList();
+            var keys = cache.ToDictionary().Keys.ToList();
             Assert.AreEqual(10, keys.Count);
             Assert.AreEqual(new SortedSet<int?>(((int?)10).Range()), new SortedSet<int?>(keys));
 
@@ -302,7 +302,7 @@ namespace KickStart.Net.Tests.Cache
             // 3, 4, 5 shall be evicted
             cache.Get(10);
 
-            keys = cache.AsMap().Keys.ToList();
+            keys = cache.ToDictionary().Keys.ToList();
             Assert.AreEqual(8, keys.Count);
             Assert.IsFalse(keys.Contains(3));
             Assert.IsFalse(keys.Contains(4));
@@ -315,7 +315,7 @@ namespace KickStart.Net.Tests.Cache
             // 9, 1, 2, 10 shall be evicted
             cache.Get(15);
 
-            keys = cache.AsMap().Keys.ToList();
+            keys = cache.ToDictionary().Keys.ToList();
             Assert.AreEqual(5, keys.Count);
             Assert.IsFalse(keys.Contains(9));
             Assert.IsFalse(keys.Contains(10));
@@ -324,13 +324,13 @@ namespace KickStart.Net.Tests.Cache
 
             cache.Get(9);
             ((LocalLoadingCache<int?, int?>)cache)._localCache.DrainRecencyQueues();
-            keys = cache.AsMap().Keys.ToList();
+            keys = cache.ToDictionary().Keys.ToList();
             Assert.AreEqual(6, keys.Count);
             Assert.IsTrue(keys.Contains(9));
 
             // 6 evicted
             cache.Get(1);
-            keys = cache.AsMap().Keys.ToList();
+            keys = cache.ToDictionary().Keys.ToList();
             Assert.AreEqual(6, keys.Count);
             Assert.IsTrue(keys.Contains(9));
             Assert.IsFalse(keys.Contains(6));
@@ -353,17 +353,17 @@ namespace KickStart.Net.Tests.Cache
             {
                 cache.Get(i);
             }
-            var keys = cache.AsMap().Keys.ToList();
+            var keys = cache.ToDictionary().Keys.ToList();
             Assert.AreEqual(10, keys.Count);
             Assert.AreEqual(new SortedSet<int?>(((int?)10).Range()), new SortedSet<int?>(keys));
 
             cache.Get(45);
-            keys = cache.AsMap().Keys.ToList();
+            keys = cache.ToDictionary().Keys.ToList();
             Assert.AreEqual(2, keys.Count);
             Assert.IsTrue(keys.Contains(45));
 
             cache.Get(46);
-            keys = cache.AsMap().Keys.ToList();
+            keys = cache.ToDictionary().Keys.ToList();
             Assert.AreEqual(2, keys.Count);
             Assert.IsTrue(keys.Contains(45));
             Assert.IsTrue(keys.Contains(0));
@@ -378,21 +378,21 @@ namespace KickStart.Net.Tests.Cache
                 .WithMaximumSize(10)
                 .Build(loader);
 
-            var keys = cache.AsMap().Keys;
+            var keys = cache.ToDictionary().Keys;
             Assert.AreEqual(0, keys.Count());
 
             foreach (var i in 5.Range())
                 cache.Get(i);
-            keys = cache.AsMap().Keys;
+            keys = cache.ToDictionary().Keys;
             Assert.AreEqual(5, keys.Count());
 
             cache.InvalidateAll();
-            keys = cache.AsMap().Keys;
+            keys = cache.ToDictionary().Keys;
             Assert.AreEqual(0, keys.Count());
 
             for (int i = 5; i <= 12; i++)
                 cache.Get(i);
-            keys = cache.AsMap().Keys;
+            keys = cache.ToDictionary().Keys;
             Assert.AreEqual(8, keys.Count());
         }
     }

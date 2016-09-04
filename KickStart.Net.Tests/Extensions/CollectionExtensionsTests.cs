@@ -179,6 +179,21 @@ namespace KickStart.Net.Tests.Extensions
             Assert.IsFalse(items.IsNotEmpty());
         }
 
+        [Test]
+        public void test_all_with_index()
+        {
+            var inputs = new List<int>() {0, 1, 2, 3, 4};
+            Assert.IsTrue(inputs.All((v, i) => v == i));
+        }
+
+        [Test]
+        public void test_any_with_index()
+        {
+            var inputs = new List<int> {0, 2, 3, 4, 5};
+            Assert.IsTrue(inputs.Any((v, i) => v == i));
+            Assert.IsFalse(inputs.All((v, i) => v == i));
+        }
+
         class SecondCharEqualityComparer : IEqualityComparer<string>
         {
             public bool Equals(string x, string y) => x[1] == y[1];

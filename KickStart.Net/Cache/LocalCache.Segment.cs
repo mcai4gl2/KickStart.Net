@@ -897,6 +897,8 @@ namespace KickStart.Net.Cache
                         _writeQueue.Clear();
                         _accessQueue.Clear();
                         _readCount = 0;
+                        ++_modCount;
+                        _count = 0;
                     }
                     finally
                     {

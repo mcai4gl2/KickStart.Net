@@ -43,8 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes.cs" />
-    <Compile Include="Cache\AbstractCache.cs" />
-    <Compile Include="Cache\AbstractLoadingCache.cs" />
     <Compile Include="Cache\CacheBuilder.cs" />
     <Compile Include="Cache\CacheLoader.cs" />
     <Compile Include="Cache\Caches.cs" />
@@ -55,25 +53,27 @@
     <Compile Include="Cache\ITicker.cs" />
     <Compile Include="Cache\LocalCache.cs" />
     <Compile Include="Cache\LocalCache.Iterators.cs">
-		<DependentUpon>LocalCache.cs</DependentUpon>
-	</Compile>
+      <DependentUpon>LocalCache.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cache\LocalCache.Queues.cs">
-		<DependentUpon>LocalCache.cs</DependentUpon>
-	</Compile>
+      <DependentUpon>LocalCache.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cache\LocalCache.ReferenceEntries.cs">
-		<DependentUpon>LocalCache.cs</DependentUpon>
-	</Compile>
+      <DependentUpon>LocalCache.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cache\LocalCache.Segment.cs">
-		<DependentUpon>LocalCache.cs</DependentUpon>
-	</Compile>
+      <DependentUpon>LocalCache.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cache\LongAddable.cs" />
     <Compile Include="Cache\LongAdder.cs" />
     <Compile Include="Cache\RemovalCause.cs" />
     <Compile Include="Cache\RemovalNotification.cs" />
     <Compile Include="Cache\IWeigher.cs" />
     <Compile Include="Cache\StatsCounter.cs" />
+    <Compile Include="Collections\Combinations.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ConstructorHelpers.cs" />
+    <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\HttpMessageExtensions.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />

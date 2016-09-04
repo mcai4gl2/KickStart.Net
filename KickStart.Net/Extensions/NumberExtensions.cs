@@ -35,7 +35,7 @@ namespace KickStart.Net.Extensions
         public static IEnumerable<int?> Range(this int? toNumberExclusive)
         {
             return Enumerable.Range(0, toNumberExclusive.Value).Cast<int?>();
-        } 
+        }
 
         /// <summary>
         /// Returns the int nearest in value to long value.

@@ -14,8 +14,13 @@ namespace KickStart.Net.Cache
         void InvalidateAll(IEnumerable<K> keys);
         void InvalidateAll();
         long Size();
-        IReadOnlyDictionary<K, V> AsMap();
+        IReadOnlyDictionary<K, V> ToDictionary();
         void CleanUp();
         CacheStats Stats();
+        bool ContainsKey(K key);
+        bool ContainsValue(V value);
+        bool IsEmpty();
+        V Remove(K key);
+        bool Remove(K key, V value);
     }
 }

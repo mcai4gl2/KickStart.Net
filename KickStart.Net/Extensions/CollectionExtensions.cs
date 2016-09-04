@@ -225,6 +225,20 @@ namespace KickStart.Net.Extensions
             }
             return result;
         }
+
+        public static bool All<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)
+        {
+            return source
+                .Select((v, i) => new {Value = v, Index = i})
+                .All(value => predicate(value.Value, value.Index));
+        }
+
+        public static bool Any<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)
+        {
+            return source
+                .Select((v, i) => new {Value = v, Index = i})
+                .Any(value => predicate(value.Value, value.Index));
+        }
     }
 
     public class SplitResult<T>

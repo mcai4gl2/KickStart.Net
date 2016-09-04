@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
-using NUnit.Framework;
 
 namespace KickStart.Net.Cache
 {
@@ -109,7 +108,7 @@ namespace KickStart.Net.Cache
             return this;
         }
         public long RefreshAfterWrite => _refreshTicks == UNSET_INT ? DEFAULT_REFRESH_MILLIS : _refreshTicks;
-        public CacheBuilder<K, V> WithRefreshAfterWrite(TimeSpan timeSpan) => WithRefreshAfterWrite(timeSpan); 
+        public CacheBuilder<K, V> WithRefreshAfterWrite(TimeSpan timeSpan) => WithRefreshAfterWrite(timeSpan.Ticks); 
 
         public CacheBuilder<K, V> WithTicker(ITicker ticker)
         {

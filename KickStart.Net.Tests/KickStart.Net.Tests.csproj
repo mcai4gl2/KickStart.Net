@@ -51,12 +51,16 @@
     <Compile Include="Cache\CacheEvictionTests.cs" />
     <Compile Include="Cache\CacheExpirationTests.cs" />
     <Compile Include="Cache\CacheManualTests.cs" />
+    <Compile Include="Cache\CacheRefreshTests.cs" />
     <Compile Include="Cache\FakeTicker.cs" />
+    <Compile Include="Cache\PopulatedCachesTests.cs" />
     <Compile Include="Cache\SimpleStatsTests.cs" />
+    <Compile Include="Collections\CombinationsTests.cs" />
     <Compile Include="Diagnostic\TraceTests.cs" />
     <Compile Include="Cache\CacheLoadingTests.cs" />
     <Compile Include="Cache\CacheStatsTests.cs" />
     <Compile Include="Extensions\CollectionExtensionsTests.cs" />
+    <Compile Include="Extensions\EmptyCachesTests.cs" />
     <Compile Include="Extensions\NumberExtensionsTests.cs" />
     <Compile Include="Extensions\PrintExtensionsTests.cs" />
     <Compile Include="Extensions\StreamExtensionsTests.cs" />
