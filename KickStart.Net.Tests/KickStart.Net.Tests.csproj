@@ -55,6 +55,7 @@
     <Compile Include="Cache\PopulatedCachesTests.cs" />
     <Compile Include="Cache\SimpleStatsTests.cs" />
     <Compile Include="Collections\CombinationsTests.cs" />
+    <Compile Include="ConstantsTests.cs" />
     <Compile Include="Diagnostic\TraceTests.cs" />
     <Compile Include="Cache\CacheLoadingTests.cs" />
     <Compile Include="Cache\CacheStatsTests.cs" />
