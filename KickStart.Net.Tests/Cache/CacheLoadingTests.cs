@@ -1,8 +1,10 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KickStart.Net.Cache;
+using KickStart.Net.Extensions;
 using KickStart.Net.Tests.Cache;
 using NUnit.Framework;
 
@@ -460,6 +462,91 @@ namespace KickStart.Net.Tests.Extensions
             Assert.AreEqual(1, stats.LoadSuccessCount);
             Assert.AreEqual(1, stats.LoadExceptionCount);
             Assert.AreEqual(1, stats.HitCount);
+        }
+
+        [Test]
+        public void test_reload_after_failure()
+        {
+            var count = 0;
+            var loader = CacheLoaders.From<int?, int?>(key =>
+            {
+                if (count ++ == 0)
+                    throw new Exception();
+                return key;
+            });
+            var listener = new CountingRemovalListener<int?, int?>();
+            var cache = CacheBuilder<int?, int?>.NewBuilder()
+                .WithRemovalListener(listener)
+                .Build(loader);
+
+            Assert.Throws<AggregateException>(() => cache.Get(1));
+
+            Assert.AreEqual(1, cache.Get(1));
+            Assert.AreEqual(0, listener.Count);
+
+            count = 0;
+            cache.Refresh(2);
+            Task.Delay(500).Wait();
+
+            Assert.AreEqual(2, cache.Get(2));
+            Assert.AreEqual(0, listener.Count);
+        }
+
+        [Test]
+        [Timeout(1000)]
+        public async Task test_concurrent_loading_default()
+        {
+            var count = 10;
+            var adder = new LongAdder();
+            var tcs = new TaskCompletionSource<bool>();
+            var value = new object();
+
+            var cache = CacheBuilder<string, object>.NewBuilder()
+                .Build(CacheLoaders.From<string, object>(key =>
+                {
+                    adder.Add(1);
+                    tcs.Task.Wait();
+                    return value;
+                }));
+
+            var results = count.Range().Select(_ => Task.Factory.StartNew(() => cache.Get("abc"))).ToList();
+            tcs.SetResult(true);
+            await Task.WhenAll(results);
+
+            Assert.AreEqual(1, adder.Sum());
+            Assert.IsTrue(results.All(r => r.Result == value));
+            Assert.AreEqual(count, results.Count);
+        }
+
+        [Test]
+        [Timeout(1000)]
+        public async Task test_concurrent_loading_null()
+        {
+            var count = 10;
+            var adder = new LongAdder();
+            var tcs = new TaskCompletionSource<bool>();
+
+            var cache = CacheBuilder<string, object>.NewBuilder()
+                .Build(CacheLoaders.From<string, object>(key =>
+                {
+                    adder.Add(1);
+                    tcs.Task.Wait();
+                    return default(object);
+                }));
+
+            var results = count.Range().Select(_ => Task.Factory.StartNew(() => cache.Get("abc"))).ToList();
+            tcs.SetResult(true);
+            try
+            {
+                await Task.WhenAll(results);
+                Assert.Fail();
+            }
+            catch (Exception)
+            {
+               
+            }
+
+            Assert.AreEqual(1, adder.Sum());
         }
     } 
 
