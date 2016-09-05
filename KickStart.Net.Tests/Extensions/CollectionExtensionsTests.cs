@@ -162,6 +162,38 @@ namespace KickStart.Net.Tests.Extensions
             Assert.AreEqual(expectedIndex, items.IndexOf(find, new SecondCharEqualityComparer()));
         }
 
+        [Test]
+        public void can_split()
+        {
+            var items = new List<int>() {1, 2, 3, 4, 5};
+            var result = items.Split(i => i > 3);
+            Assert.AreEqual(new[] {4,5}, result.True);
+            Assert.AreEqual(new[] {1,2,3}, result.False);
+        }
+
+        [Test]
+        public void test_is_empty()
+        {
+            var items = new List<int>();
+            Assert.IsTrue(items.IsEmpty());
+            Assert.IsFalse(items.IsNotEmpty());
+        }
+
+        [Test]
+        public void test_all_with_index()
+        {
+            var inputs = new List<int>() {0, 1, 2, 3, 4};
+            Assert.IsTrue(inputs.All((v, i) => v == i));
+        }
+
+        [Test]
+        public void test_any_with_index()
+        {
+            var inputs = new List<int> {0, 2, 3, 4, 5};
+            Assert.IsTrue(inputs.Any((v, i) => v == i));
+            Assert.IsFalse(inputs.All((v, i) => v == i));
+        }
+
         class SecondCharEqualityComparer : IEqualityComparer<string>
         {
             public bool Equals(string x, string y) => x[1] == y[1];

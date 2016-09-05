@@ -3,7 +3,7 @@
 
 # KickStart.Net
 
-KickStart is a collection of useful resuable functions which are too small to be have its own library.
+KickStart is a collection of useful reusable functions which are too small to be have its own library.
 
 ## KickStart.Net.dll
 
@@ -18,8 +18,12 @@ KickStart is a collection of useful resuable functions which are too small to be
 * `GetOrDefault` gets value from dictionary, returns the default value if key is not found
 * `ToHashSet` adds all the item in an `IEnumerable<T>` into a new `HashSet<T>`
 * `IndexOf` to find the index of an item in a list using an `IEqualityComparer<T>`
-* `ToDelimitedString` to convert some items into a delmited string
+* `ToDelimitedString` to convert some items into a delimited string
 * `IndexBy` to convert `IEnumerable<T>` into a new `Dictionary<K, T>` keyed by key selector `Func<T, K>`
+* `IsEmpty` and `IsNotEmpty` checks if a `IList` is empty or not
+* `Split` splits a `IList` based on a `Predicate` 
+* `All<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)` extends `All` to access index
+* `Any<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)` extends `Any` to access index
 
 ### StreamExtensions
 * `ToStream` converts from `string` or `byte[]` into `stream`
@@ -40,3 +44,14 @@ KickStart is a collection of useful resuable functions which are too small to be
 
 ### Diagnostic
 * `Trace.Here()` returns a trace object which contains the line number, method name and file name where the method is called
+
+### Cache
+A port of Guava Cache into C#. More details at [here](KickStart.Net/Cache/README.md)
+
+### Combinations
+
+* `Collections.Combinations` generates cartesian product based on inputs, e.g.:
+    ```C#
+    var combinations = new Combinations<int>(new[] {1, 2, 3}, new[] {2, 3, 4});
+    /// Generates list of: [[1,2],[1,3],[1,4],[2,2],[2,3],[2,4],[3,2],[3,3],[3,4]]
+    ```

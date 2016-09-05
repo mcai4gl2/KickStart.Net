@@ -5,11 +5,6 @@ namespace KickStart.Net
 {
     public static class Objects
     {
-        public static int GetHashCode(params object[] objects)
-        {
-            return objects.GetHashCode();
-        }
-
         public static ToStringHelper ToStringHelper(object self)
         {
             return new ToStringHelper(self.GetType().Name);

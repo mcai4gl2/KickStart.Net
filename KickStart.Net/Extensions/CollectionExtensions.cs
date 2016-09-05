@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Security.Policy;
 
 namespace KickStart.Net.Extensions
 {
@@ -205,5 +206,44 @@ namespace KickStart.Net.Extensions
         {
             return Override(@base, @override, keySelector);
         }
+
+        public static bool IsEmpty<T>(this IList<T> list) => list.Count == 0;
+
+        public static bool IsNotEmpty<T>(this IList<T> list) => list.Count != 0;
+
+        public static SplitResult<T> Split<T>(this IList<T> list, Predicate<T> predicate)
+        {
+            var result = new SplitResult<T>
+            {
+                True = new List<T>(list.Count),
+                False = new List<T>(list.Count)
+            };
+            foreach (var value in list)
+            {
+                if (predicate(value)) result.True.Add(value);
+                else result.False.Add(value);
+            }
+            return result;
+        }
+
+        public static bool All<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)
+        {
+            return source
+                .Select((v, i) => new {Value = v, Index = i})
+                .All(value => predicate(value.Value, value.Index));
+        }
+
+        public static bool Any<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)
+        {
+            return source
+                .Select((v, i) => new {Value = v, Index = i})
+                .Any(value => predicate(value.Value, value.Index));
+        }
+    }
+
+    public class SplitResult<T>
+    {
+        public IList<T> True { get; set; }
+        public IList<T> False { get; set; } 
     }
 }
