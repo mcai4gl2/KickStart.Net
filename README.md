@@ -24,6 +24,8 @@ KickStart is a collection of useful reusable functions which are too small to be
 * `Split` splits a `IList` based on a `Predicate` 
 * `All<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)` extends `All` to access index
 * `Any<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)` extends `Any` to access index
+* `Parse` returns items from the IEnumerable<string> that can be transformed into a different type via a delegate, e.g. `int.TryParse`
+* `Attempt` returns a sequence of a result, where each result can be the result of applying a function, or the exception that occurred when applying the function.
 
 ### StreamExtensions
 * `ToStream` converts from `string` or `byte[]` into `stream`
