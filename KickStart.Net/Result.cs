@@ -59,47 +59,47 @@ namespace KickStart.Net
         }
     }
 
-
     /// <summary>Represents a result or some sort of error</summary>
     /// <remarks>Allows LINQ over functions that might throw an exception by using <see cref="Result.Attempt{T}(Func{T})"/></remarks>
-    public abstract class Result<T, TError>
+    public struct Result<T, TError>
     {
+        readonly bool _ok;
+        readonly T _value;
+        readonly TError _error;
+
         /// <summary>Is the result successful, does it have a <see cref="Value"/>?</summary>
-        public bool IsOk => this is Ok<T, TError>;
+        public bool IsOk => _ok;
 
         /// <summary>Is the result a failure, does it have a <see cref="Error"/>?</summary>
-        public bool IsError => this is Error<T, TError>;
+        public bool IsError => !_ok;
 
         /// <summary>Successful result</summary>
-        public T Value => ((Ok<T, TError>)this).Value;
+        public T Value => _value;
 
         /// <summary>The error that occurred</summary>
-        public TError Error => ((Error<T, TError>)this).Value;
+        public TError Error => _error;
 
         /// <summary>Implicit conversion from a successful value</summary>
-        public static implicit operator Result<T, TError>(T value) => new Ok<T, TError>(value);
+        public static implicit operator Result<T, TError>(T value) => new Result<T, TError>(value);
         
         /// <summary>Implicit conversion from an error value</summary>
-        public static implicit operator Result<T, TError>(TError error) => new Error<T, TError>(error);
-    }
+        public static implicit operator Result<T, TError>(TError error) => new Result<T, TError>(error);
 
-    sealed class Ok<T, TError> : Result<T, TError>
-    {
-        public new T Value { get; }
-
-        public Ok(T value)
+        /// <summary>A new result that <see cref="IsOk"/></summary>
+        public Result(T value)
         {
-            Value = value;
+            _value = value;
+            _error = default(TError);
+            _ok = true;
         }
-    }
 
-    sealed class Error<T, TError> : Result<T, TError>
-    {
-        public new TError Value { get; }
-
-        public Error(TError error)
+        /// <summary>A new result that <see cref="IsError"/></summary>
+        public Result(TError error)
         {
-            Value = error;
+            _value = default(T);
+            _error = error;
+            _ok = false;
         }
+        public override string ToString() => _ok ? Value?.ToString() : Error?.ToString();
     }
 }
