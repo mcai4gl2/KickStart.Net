@@ -67,7 +67,9 @@
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\TaskExtensionsTests.cs" />
     <Compile Include="ParsingTests.cs" />
+    <Compile Include="Metrics\EwmaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeUnitTests.cs" />
     <Compile Include="ToStringHelperTests.cs" />
   </ItemGroup>
   <ItemGroup>

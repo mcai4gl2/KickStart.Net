@@ -22,5 +22,10 @@ namespace KickStart.Net.Cache
         {
             return Interlocked.Read(ref _acc);
         }
+
+        public long SumAndReset()
+        {
+            return Interlocked.Exchange(ref _acc, 0);
+        }
     }
 }

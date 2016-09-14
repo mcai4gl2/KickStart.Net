@@ -9,6 +9,7 @@ KickStart is a collection of useful reusable functions which are too small to be
 
 * `Objects.GetHashCode` a port of Guava's `MoreObjects.HashCode` which generates a hash code for multiple values
 * `Objects.ToStringHelper` a port of Guava's `MoreObjects.ToStringHelper` which is helpful to implement `ToString` method 
+* `TimeUnits` is a port of Java's `java.util.concurrent.TimeUnit` originally written by Doug Lea as part of JSR-166
 
 ### CollectionExtensions
 * `AddRange` adds multiple items to a `ICollection<T>`
@@ -53,7 +54,7 @@ A port of Guava Cache into C#. More details at [here](KickStart.Net/Cache/README
 ### Combinations
 
 * `Collections.Combinations` generates cartesian product based on inputs, e.g.:
-    ```C#
-    var combinations = new Combinations<int>(new[] {1, 2, 3}, new[] {2, 3, 4});
-    /// Generates list of: [[1,2],[1,3],[1,4],[2,2],[2,3],[2,4],[3,2],[3,3],[3,4]]
-    ```
+```C#
+var combinations = new Combinations<int>(new[] {1, 2, 3}, new[] {2, 3, 4});
+/// Generates list of: [[1,2],[1,3],[1,4],[2,2],[2,3],[2,4],[3,2],[3,3],[3,4]]
+```
