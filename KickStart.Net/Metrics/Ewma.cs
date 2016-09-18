@@ -6,11 +6,11 @@ namespace KickStart.Net.Metrics
 {
     public class Ewma
     {
-        private static readonly int Interval = 5;
-        private static readonly double SecondsPerMinute = 60.0;
-        private static readonly int OneMinute = 1;
-        private static readonly int FiveMinutes = 5;
-        private static readonly int FifteenMinutes = 15;
+        private const int Interval = 5;
+        private const double SecondsPerMinute = 60.0;
+        private const int OneMinute = 1;
+        private const int FiveMinutes = 5;
+        private const int FifteenMinutes = 15;
         private static readonly double M1Alpha = 1 - Math.Exp(-Interval/SecondsPerMinute/OneMinute);
         private static readonly double M5Alpha = 1 - Math.Exp(-Interval/SecondsPerMinute/FiveMinutes);
         private static readonly double M15Alpha = 1 - Math.Exp(-Interval/SecondsPerMinute/FifteenMinutes);

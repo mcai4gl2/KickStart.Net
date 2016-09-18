@@ -14,14 +14,14 @@ namespace KickStart.Net
         TimeSpan ToTimeSpan(long d);
     }
 
-    public struct TimeUnits
+    public static class TimeUnits
     {
-        private static readonly long C0 = 1L;
-        private static readonly long C1 = C0*10000L; // millisec
-        private static readonly long C2 = C1*1000L; // sec
-        private static readonly long C3 = C2*60L; // min
-        private static readonly long C4 = C3*60L; // hour
-        private static readonly long C5 = C4*24L; // day
+        private const long C0 = 1L;
+        private const long C1 = C0*10000L; // millisec
+        private const long C2 = C1*1000L; // sec
+        private const long C3 = C2*60L; // min
+        private const long C4 = C3*60L; // hour
+        private const long C5 = C4*24L; // day
 
         public static readonly ITimeUnit Ticks = new _Ticks();
         public static readonly ITimeUnit Milliseconds = new _Milliseconds();
@@ -30,7 +30,7 @@ namespace KickStart.Net
         public static readonly ITimeUnit Hours = new _Hours();
         public static readonly ITimeUnit Days = new _Days();
 
-        struct _Ticks : ITimeUnit
+        class _Ticks : ITimeUnit
         {
             public long ToTicks(long d) => d;
             public long ToMillis(long d) => d/C1/C0;
@@ -42,7 +42,7 @@ namespace KickStart.Net
             public TimeSpan ToTimeSpan(long d) => new TimeSpan(d);
         }
 
-        struct _Milliseconds : ITimeUnit
+        class _Milliseconds : ITimeUnit
         {
             public long ToTicks(long d) => X(d, C1/C0, Max/(C1/C0));
             public long ToMillis(long d) => d;
@@ -54,7 +54,7 @@ namespace KickStart.Net
             public TimeSpan ToTimeSpan(long d) => new TimeSpan(ToTicks(d));
         }
 
-        struct _Seconds : ITimeUnit
+        class _Seconds : ITimeUnit
         {
             public long ToTicks(long d) => X(d, C2 / C0, Max / (C2 / C0));
             public long ToMillis(long d) => X(d, C2 / C1, Max / (C2 / C1));
@@ -66,7 +66,7 @@ namespace KickStart.Net
             public TimeSpan ToTimeSpan(long d) => TimeSpan.FromSeconds(d);
         }
 
-        struct _Minutes : ITimeUnit
+        class _Minutes : ITimeUnit
         {
             public long ToTicks(long d) => X(d, C3 / C0, Max / (C3 / C0));
             public long ToMillis(long d) => X(d, C3 / C1, Max / (C3 / C1));
@@ -78,7 +78,7 @@ namespace KickStart.Net
             public TimeSpan ToTimeSpan(long d) => TimeSpan.FromMinutes(d);
         }
 
-        struct _Hours : ITimeUnit
+        class _Hours : ITimeUnit
         {
             public long ToTicks(long d) => X(d, C4 / C0, Max / (C4 / C0));
             public long ToMillis(long d) => X(d, C4 / C1, Max / (C4 / C1));
@@ -90,7 +90,7 @@ namespace KickStart.Net
             public TimeSpan ToTimeSpan(long d) => TimeSpan.FromHours(d);
         }
 
-        struct _Days : ITimeUnit
+        class _Days : ITimeUnit
         {
             public long ToTicks(long d) => X(d, C5 / C0, Max / (C5 / C0));
             public long ToMillis(long d) => X(d, C5 / C1, Max / (C5 / C1));

@@ -66,8 +66,10 @@
     <Compile Include="Extensions\StreamExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\TaskExtensionsTests.cs" />
-    <Compile Include="ParsingTests.cs" />
+    <Compile Include="Metrics\CachedGaugeTests.cs" />
     <Compile Include="Metrics\EwmaTests.cs" />
+    <Compile Include="Metrics\UniformSnapshotTests.cs" />
+    <Compile Include="Metrics\WeightedSnapshotTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeUnitTests.cs" />
     <Compile Include="ToStringHelperTests.cs" />
