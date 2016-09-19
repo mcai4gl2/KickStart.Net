@@ -67,7 +67,10 @@
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\TaskExtensionsTests.cs" />
     <Compile Include="Metrics\CachedGaugeTests.cs" />
+    <Compile Include="Metrics\ClockTests.cs" />
     <Compile Include="Metrics\EwmaTests.cs" />
+    <Compile Include="Metrics\MeterTests.cs" />
+    <Compile Include="Metrics\MetricRegistryTests.cs" />
     <Compile Include="Metrics\UniformSnapshotTests.cs" />
     <Compile Include="Metrics\WeightedSnapshotTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

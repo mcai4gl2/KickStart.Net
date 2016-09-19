@@ -41,6 +41,12 @@ namespace KickStart.Net.Metrics
             RegisterAll(null, metrics);
         }
 
+        public bool Remove(string name)
+        {
+            IMetric removed;
+            return _metrics.TryRemove(name, out removed);
+        }
+
         private void RegisterAll(string prefix, IMetricSet metrics)
         {
             foreach (var entry in metrics.GetMetrics())
@@ -65,6 +71,9 @@ namespace KickStart.Net.Metrics
         {
             return _metrics.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         }
+
+        public Counter Counter(string name) => GetOrAdd(name, MetricBuilders.Counters);
+        public Meter Meter(string name) => GetOrAdd(name, MetricBuilders.Meters);
     }
 
     interface IMetricBuilder<T> where T : IMetric
@@ -76,6 +85,7 @@ namespace KickStart.Net.Metrics
     static class MetricBuilders
     {
         public static readonly IMetricBuilder<Counter> Counters = new CounterMetricBuilder(); 
+        public static readonly IMetricBuilder<Meter> Meters = new MeterMetricBuilder(); 
 
         class CounterMetricBuilder : IMetricBuilder<Counter>
         {
@@ -87,6 +97,19 @@ namespace KickStart.Net.Metrics
             public bool Is(IMetric metric)
             {
                 return metric is Counter;
+            }
+        }
+
+        class MeterMetricBuilder : IMetricBuilder<Meter>
+        {
+            public Meter New()
+            {
+                return new Meter();
+            }
+
+            public bool Is(IMetric metric)
+            {
+                return metric is Meter;
             }
         }
     }
