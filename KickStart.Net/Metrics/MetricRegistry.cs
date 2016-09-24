@@ -74,6 +74,8 @@ namespace KickStart.Net.Metrics
 
         public Counter Counter(string name) => GetOrAdd(name, MetricBuilders.Counters);
         public Meter Meter(string name) => GetOrAdd(name, MetricBuilders.Meters);
+        public Histogram Histogram(string name) => GetOrAdd(name, MetricBuilders.Histograms);
+        public Timer Timer(string name) => GetOrAdd(name, MetricBuilders.Timers);
     }
 
     interface IMetricBuilder<T> where T : IMetric
@@ -86,6 +88,8 @@ namespace KickStart.Net.Metrics
     {
         public static readonly IMetricBuilder<Counter> Counters = new CounterMetricBuilder(); 
         public static readonly IMetricBuilder<Meter> Meters = new MeterMetricBuilder(); 
+        public static readonly IMetricBuilder<Histogram> Histograms = new HistogramMetricBuilder(); 
+        public static readonly IMetricBuilder<Timer> Timers = new TimerMetricBuilder(); 
 
         class CounterMetricBuilder : IMetricBuilder<Counter>
         {
@@ -110,6 +114,32 @@ namespace KickStart.Net.Metrics
             public bool Is(IMetric metric)
             {
                 return metric is Meter;
+            }
+        }
+
+        class HistogramMetricBuilder : IMetricBuilder<Histogram>
+        {
+            public Histogram New()
+            {
+                return new Histogram(new ExponentiallyDecayingReservoir());
+            }
+
+            public bool Is(IMetric metric)
+            {
+                return metric is Histogram;
+            }
+        }
+
+        class TimerMetricBuilder : IMetricBuilder<Timer>
+        {
+            public Timer New()
+            {
+                return new Timer();
+            }
+
+            public bool Is(IMetric metric)
+            {
+                return metric is Timer;
             }
         }
     }
