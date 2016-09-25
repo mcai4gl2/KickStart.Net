@@ -47,6 +47,14 @@ namespace KickStart.Net.Metrics
             return _metrics.TryRemove(name, out removed);
         }
 
+        public void RemoveMatching(IMetricFilter filter)
+        {
+            var keysToRemove = _metrics.Where(entry => filter.Matches(entry.Key, entry.Value))
+                .Select(entry => entry.Key);
+            foreach (var key in keysToRemove)
+                Remove(key);
+        }
+
         private void RegisterAll(string prefix, IMetricSet metrics)
         {
             foreach (var entry in metrics.GetMetrics())
@@ -67,6 +75,11 @@ namespace KickStart.Net.Metrics
             return (T)_metrics.GetOrAdd(name, key => Register(name, builder.New()));
         }
 
+        public T GetOrAdd<T>(string name, IMetric metric) where T : IMetric
+        {
+            return (T) _metrics.GetOrAdd(name, metric);
+        }
+
         public IReadOnlyDictionary<string, IMetric> GetMetrics()
         {
             return _metrics.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
@@ -76,6 +89,52 @@ namespace KickStart.Net.Metrics
         public Meter Meter(string name) => GetOrAdd(name, MetricBuilders.Meters);
         public Histogram Histogram(string name) => GetOrAdd(name, MetricBuilders.Histograms);
         public Timer Timer(string name) => GetOrAdd(name, MetricBuilders.Timers);
+
+        public Dictionary<string, Counter> Counters()
+        {
+            return Counters(MetricFilters.All);
+        }
+
+        public Dictionary<string, Counter> Counters(IMetricFilter filter)
+        {
+            return Metrics<Counter>(filter);
+        }
+
+        public Dictionary<string, Meter> Meters()
+        {
+            return Metrics<Meter>(MetricFilters.All);
+        }
+
+        public Dictionary<string, Meter> Meters(IMetricFilter filter)
+        {
+            return Metrics<Meter>(filter);
+        }
+
+        public Dictionary<string, Histogram> Histograms()
+        {
+            return Metrics<Histogram>(MetricFilters.All);
+        }
+
+        public Dictionary<string, Histogram> Histograms(IMetricFilter filter)
+        {
+            return Metrics<Histogram>(filter);
+        }
+
+        public Dictionary<string, Timer> Timers()
+        {
+            return Metrics<Timer>(MetricFilters.All);
+        }
+
+        public Dictionary<string, Timer> Timers(IMetricFilter filter)
+        {
+            return Metrics<Timer>(filter);
+        }
+
+        private Dictionary<string, T> Metrics<T>(IMetricFilter filter) where T : IMetric
+        {
+            return _metrics.Where(kvp => filter.Matches(kvp.Key, kvp.Value) && kvp.Value is T)
+                           .ToDictionary(kvp => kvp.Key, kvp => (T)kvp.Value);
+        } 
     }
 
     interface IMetricBuilder<T> where T : IMetric

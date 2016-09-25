@@ -23,6 +23,7 @@ namespace KickStart.Net.Tests.Metrics
             var meter2 = _metricRegistry.Meter("meter1");
             Assert.AreSame(meter, meter2);
             Assert.AreEqual(1, _metricRegistry.GetMetrics().Count);
+            Assert.AreEqual(1, _metricRegistry.Meters().Count);
 
             Assert.IsTrue(_metricRegistry.Remove("meter1"));
             Assert.AreEqual(0, _metricRegistry.GetMetrics().Count);
@@ -37,6 +38,7 @@ namespace KickStart.Net.Tests.Metrics
             var counter2 = _metricRegistry.Counter("counter1");
             Assert.AreSame(counter, counter2);
             Assert.AreEqual(1, _metricRegistry.GetMetrics().Count);
+            Assert.AreEqual(1, _metricRegistry.Counters().Count);
 
             Assert.IsTrue(_metricRegistry.Remove("counter1"));
             Assert.AreEqual(0, _metricRegistry.GetMetrics().Count);
@@ -51,6 +53,7 @@ namespace KickStart.Net.Tests.Metrics
             var histogram2 = _metricRegistry.Histogram("histogram1");
             Assert.AreSame(histogram, histogram2);
             Assert.AreEqual(1, _metricRegistry.GetMetrics().Count);
+            Assert.AreEqual(1, _metricRegistry.Histograms().Count);
 
             Assert.IsTrue(_metricRegistry.Remove("histogram1"));
             Assert.AreEqual(0, _metricRegistry.GetMetrics().Count);
@@ -65,6 +68,7 @@ namespace KickStart.Net.Tests.Metrics
             var timer2 = _metricRegistry.Timer("timer1");
             Assert.AreSame(timer, timer2);
             Assert.AreEqual(1, _metricRegistry.GetMetrics().Count);
+            Assert.AreEqual(1, _metricRegistry.Timers().Count);
 
             Assert.IsTrue(_metricRegistry.Remove("timer1"));
             Assert.AreEqual(0, _metricRegistry.GetMetrics().Count);

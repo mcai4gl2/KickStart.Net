@@ -41,6 +41,11 @@ KickStart is a collection of useful reusable functions which are too small to be
 * `DontWait` indicates don't wait for completion of the task is intentionally
 * `ContinueWhenCancelled` ignores `TaskCancelledException` when task is cancelled 
 
+### TaskFactoryExtensions
+* `Schedule` executes a one-shot action after a given delay
+* `ScheduleAtFixedRate` executes a periodic action firstly after the given initial delay and subsequently with the given period
+* `ScheduleAtFixedDelay` executes a periodic action firstly after the given initial delay and subsequently with the given delay
+
 ### HttpMessageExtensions
 * `WithContent` adds request content to a `HttpRequestMessage`
 * `ContentAsStream` reads response content from `HttpResponseMessage` and return as `Stream`

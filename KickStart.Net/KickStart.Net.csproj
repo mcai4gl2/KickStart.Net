@@ -83,9 +83,11 @@
     <Compile Include="Extensions\PrintExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TaskExtensions.cs" />
+    <Compile Include="Extensions\TaskFactoryExtensions.cs" />
     <Compile Include="Extensions\Tasks.cs" />
     <Compile Include="Metrics\CachedGauge.cs" />
     <Compile Include="Metrics\Clock.cs" />
+    <Compile Include="Metrics\ConsoleReporter.cs" />
     <Compile Include="Metrics\Counter.cs" />
     <Compile Include="Metrics\Ewma.cs" />
     <Compile Include="Metrics\ExponentiallyDecayingReservoir.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Metrics\ICounting.cs" />
     <Compile Include="Metrics\IMetered.cs" />
     <Compile Include="Metrics\IMetric.cs" />
+    <Compile Include="Metrics\IMetricFilter.cs" />
     <Compile Include="Metrics\IReporter.cs" />
     <Compile Include="Metrics\IReservoir.cs" />
     <Compile Include="Metrics\ISampling.cs" />

@@ -66,8 +66,10 @@
     <Compile Include="Extensions\StreamExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\TaskExtensionsTests.cs" />
+    <Compile Include="Extensions\TaskFactoryExtensionsTests.cs" />
     <Compile Include="Metrics\CachedGaugeTests.cs" />
     <Compile Include="Metrics\ClockTests.cs" />
+    <Compile Include="Metrics\ConsoleReporterTests.cs" />
     <Compile Include="Metrics\EwmaTests.cs" />
     <Compile Include="Metrics\ExponentiallyDecayingReservoirTests.cs" />
     <Compile Include="Metrics\HistogramTests.cs" />

@@ -2,5 +2,6 @@
 {
     public interface IReporter
     {
+        void Report();
     }
 }
