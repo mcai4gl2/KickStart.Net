@@ -10,8 +10,23 @@ KickStart is a collection of useful reusable functions which are too small to be
 * `Objects.GetHashCode` a port of Guava's `MoreObjects.HashCode` which generates a hash code for multiple values
 * `Objects.ToStringHelper` a port of Guava's `MoreObjects.ToStringHelper` which is helpful to implement `ToString` method 
 * `TimeUnits` is a port of Java's `java.util.concurrent.TimeUnit` originally written by Doug Lea as part of JSR-166
+* `Optional<T>` is an immutable object that may contain a non-null reference of type `T`. This ports Java's `java.util.Optional`
+* `Trace.Here()` returns a trace object which contains the line number, method name and file name where the method is called
+* `Collections.Combinations` generates cartesian product based on inputs, e.g.:
+```C#
+var combinations = new Combinations<int>(new[] {1, 2, 3}, new[] {2, 3, 4});
+/// Generates list of: [[1,2],[1,3],[1,4],[2,2],[2,3],[2,4],[3,2],[3,3],[3,4]]
+```
 
-### CollectionExtensions
+### Cache
+A port of Guava Cache into C#. More details at [here](KickStart.Net/Cache/README.md).
+
+### Metrics
+A C# port of Coda Hale's Metrics library [https://github.com/dropwizard/metrics](https://github.com/dropwizard/metrics).
+
+### Extensions
+
+#### Collection
 * `AddRange` adds multiple items to a `ICollection<T>`
 * `SetRange` adds or replaces multiple items in a `ICollection<T>` or `IList<T>`
 * `RemoveRange` removes multiple keys from a dictionary
@@ -28,41 +43,24 @@ KickStart is a collection of useful reusable functions which are too small to be
 * `Parse` returns items from the IEnumerable<string> that can be transformed into a different type via a delegate, e.g. `int.TryParse`
 * `Attempt` returns a sequence of a result, where each result can be the result of applying a function, or the exception that occurred when applying the function.
 
-### StreamExtensions
+#### Stream
 * `ToStream` converts from `string` or `byte[]` into `stream`
 * `StreamToString` converts from `stream` to `string`
 
-### PrintExtensions
+#### Print
 * `Print` or `P` to print out the object in console
 
-### TaskExtensions
+#### Task
 * `ToListAsync` awaits a task which returns `IEnumerable<T>` and returns `List<T>`
 * `TimeoutAfter` awaits a task to return or timeout passed
 * `DontWait` indicates don't wait for completion of the task is intentionally
 * `ContinueWhenCancelled` ignores `TaskCancelledException` when task is cancelled 
 
-### TaskFactoryExtensions
+#### TaskFactory
 * `Schedule` executes a one-shot action after a given delay
 * `ScheduleAtFixedRate` executes a periodic action firstly after the given initial delay and subsequently with the given period
 * `ScheduleAtFixedDelay` executes a periodic action firstly after the given initial delay and subsequently with the given delay
 
-### HttpMessageExtensions
+#### HttpMessage
 * `WithContent` adds request content to a `HttpRequestMessage`
 * `ContentAsStream` reads response content from `HttpResponseMessage` and return as `Stream`
-
-### Diagnostic
-* `Trace.Here()` returns a trace object which contains the line number, method name and file name where the method is called
-
-### Cache
-A port of Guava Cache into C#. More details at [here](KickStart.Net/Cache/README.md).
-
-### Metrics
-A C# port of Coda Hale's Metrics library [https://github.com/dropwizard/metrics](https://github.com/dropwizard/metrics).
-
-### Combinations
-
-* `Collections.Combinations` generates cartesian product based on inputs, e.g.:
-```C#
-var combinations = new Combinations<int>(new[] {1, 2, 3}, new[] {2, 3, 4});
-/// Generates list of: [[1,2],[1,3],[1,4],[2,2],[2,3],[2,4],[3,2],[3,3],[3,4]]
-```

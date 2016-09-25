@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace KickStart.Net.Diagnostic
+namespace KickStart.Net
 {
     public struct Trace
     {
