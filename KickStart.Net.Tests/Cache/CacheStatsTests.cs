@@ -1,7 +1,7 @@
 ﻿using KickStart.Net.Cache;
 using NUnit.Framework;
 
-namespace KickStart.Net.Tests.Extensions
+namespace KickStart.Net.Tests.Cache
 {
     [TestFixture]
     public class CacheStatsTests

@@ -1,5 +1,4 @@
-﻿using KickStart.Net.Diagnostic;
-using KickStart.Net.Extensions;
+﻿using KickStart.Net.Extensions;
 using NUnit.Framework;
 
 namespace KickStart.Net.Tests.Diagnostic
@@ -12,7 +11,7 @@ namespace KickStart.Net.Tests.Diagnostic
         {
             var trace = Trace.Here();
             trace.P();
-            Assert.AreEqual(13, trace.LineNumber);
+            Assert.AreEqual(12, trace.LineNumber);
             Assert.AreEqual(nameof(test_trace), trace.MemberName);        
         }
     }

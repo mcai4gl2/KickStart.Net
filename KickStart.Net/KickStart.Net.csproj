@@ -85,7 +85,7 @@
     <Compile Include="Extensions\NumberExtensions.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
-    <Compile Include="Diagnostic\Trace.cs" />
+    <Compile Include="Trace.cs" />
     <Compile Include="Extensions\PrintExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TaskExtensions.cs" />
@@ -114,6 +114,7 @@
     <Compile Include="Metrics\UniformSnapshot.cs" />
     <Compile Include="Metrics\WeightedSample.cs" />
     <Compile Include="Objects.cs" />
+    <Compile Include="Optional.cs" />
     <Compile Include="Parsing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />
