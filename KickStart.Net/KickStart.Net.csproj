@@ -77,23 +77,49 @@
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\HttpMessageExtensions.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />
+    <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Diagnostic\Trace.cs" />
     <Compile Include="Extensions\PrintExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TaskExtensions.cs" />
+    <Compile Include="Extensions\TaskFactoryExtensions.cs" />
     <Compile Include="Extensions\Tasks.cs" />
+    <Compile Include="Metrics\CachedGauge.cs" />
+    <Compile Include="Metrics\Clock.cs" />
+    <Compile Include="Metrics\ConsoleReporter.cs" />
+    <Compile Include="Metrics\Counter.cs" />
+    <Compile Include="Metrics\Ewma.cs" />
+    <Compile Include="Metrics\ExponentiallyDecayingReservoir.cs" />
+    <Compile Include="Metrics\Histogram.cs" />
+    <Compile Include="Metrics\IGauge.cs" />
+    <Compile Include="Metrics\ICounting.cs" />
+    <Compile Include="Metrics\IMetered.cs" />
+    <Compile Include="Metrics\IMetric.cs" />
+    <Compile Include="Metrics\IMetricFilter.cs" />
+    <Compile Include="Metrics\IReporter.cs" />
+    <Compile Include="Metrics\IReservoir.cs" />
+    <Compile Include="Metrics\ISampling.cs" />
+    <Compile Include="Metrics\Meter.cs" />
+    <Compile Include="Metrics\MetricRegistry.cs" />
+    <Compile Include="Metrics\Snapshot.cs" />
+    <Compile Include="Metrics\Timer.cs" />
+    <Compile Include="Metrics\UniformReservoir.cs" />
+    <Compile Include="Metrics\UniformSnapshot.cs" />
+    <Compile Include="Metrics\WeightedSample.cs" />
     <Compile Include="Objects.cs" />
     <Compile Include="Parsing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="Tasks.cs" />
+    <Compile Include="TimeUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Cache\README.md" />
     <None Include="KickStart.Net.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -4,6 +4,7 @@ using System.Linq;
 using KickStart.Net.Cache;
 using KickStart.Net.Collections;
 using KickStart.Net.Extensions;
+using KickStart.Net.Tests.Cache;
 using NUnit.Framework;
 
 namespace KickStart.Net.Tests.Extensions

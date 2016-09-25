@@ -9,6 +9,7 @@ KickStart is a collection of useful reusable functions which are too small to be
 
 * `Objects.GetHashCode` a port of Guava's `MoreObjects.HashCode` which generates a hash code for multiple values
 * `Objects.ToStringHelper` a port of Guava's `MoreObjects.ToStringHelper` which is helpful to implement `ToString` method 
+* `TimeUnits` is a port of Java's `java.util.concurrent.TimeUnit` originally written by Doug Lea as part of JSR-166
 
 ### CollectionExtensions
 * `AddRange` adds multiple items to a `ICollection<T>`
@@ -40,6 +41,11 @@ KickStart is a collection of useful reusable functions which are too small to be
 * `DontWait` indicates don't wait for completion of the task is intentionally
 * `ContinueWhenCancelled` ignores `TaskCancelledException` when task is cancelled 
 
+### TaskFactoryExtensions
+* `Schedule` executes a one-shot action after a given delay
+* `ScheduleAtFixedRate` executes a periodic action firstly after the given initial delay and subsequently with the given period
+* `ScheduleAtFixedDelay` executes a periodic action firstly after the given initial delay and subsequently with the given delay
+
 ### HttpMessageExtensions
 * `WithContent` adds request content to a `HttpRequestMessage`
 * `ContentAsStream` reads response content from `HttpResponseMessage` and return as `Stream`
@@ -48,12 +54,15 @@ KickStart is a collection of useful reusable functions which are too small to be
 * `Trace.Here()` returns a trace object which contains the line number, method name and file name where the method is called
 
 ### Cache
-A port of Guava Cache into C#. More details at [here](KickStart.Net/Cache/README.md)
+A port of Guava Cache into C#. More details at [here](KickStart.Net/Cache/README.md).
+
+### Metrics
+A C# port of Coda Hale's Metrics library [https://github.com/dropwizard/metrics](https://github.com/dropwizard/metrics).
 
 ### Combinations
 
 * `Collections.Combinations` generates cartesian product based on inputs, e.g.:
-    ```C#
-    var combinations = new Combinations<int>(new[] {1, 2, 3}, new[] {2, 3, 4});
-    /// Generates list of: [[1,2],[1,3],[1,4],[2,2],[2,3],[2,4],[3,2],[3,3],[3,4]]
-    ```
+```C#
+var combinations = new Combinations<int>(new[] {1, 2, 3}, new[] {2, 3, 4});
+/// Generates list of: [[1,2],[1,3],[1,4],[2,2],[2,3],[2,4],[3,2],[3,3],[3,4]]
+```
