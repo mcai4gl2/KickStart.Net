@@ -26,7 +26,7 @@ A C# port of Coda Hale's Metrics library [https://github.com/dropwizard/metrics]
 
 ### Extensions
 
-#### Collection
+##### Collection
 * `AddRange` adds multiple items to a `ICollection<T>`
 * `SetRange` adds or replaces multiple items in a `ICollection<T>` or `IList<T>`
 * `RemoveRange` removes multiple keys from a dictionary
@@ -41,26 +41,27 @@ A C# port of Coda Hale's Metrics library [https://github.com/dropwizard/metrics]
 * `All<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)` extends `All` to access index
 * `Any<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)` extends `Any` to access index
 * `Parse` returns items from the IEnumerable<string> that can be transformed into a different type via a delegate, e.g. `int.TryParse`
-* `Attempt` returns a sequence of a result, where each result can be the result of applying a function, or the exception that occurred when applying the function.
+* `Attempt` returns a sequence of a result, where each result can be the result of applying a function, or the exception that occurred when applying the function
+* `SafeContainsKey`, `SafeRemove`, `SafeGet`, `SafeSet`, `SafeAdd` extends `IDictionary<TK, TV>` to apply a safe operation without throwing exceptions
 
-#### Stream
+##### Stream
 * `ToStream` converts from `string` or `byte[]` into `stream`
 * `StreamToString` converts from `stream` to `string`
 
-#### Print
+##### Print
 * `Print` or `P` to print out the object in console
 
-#### Task
+##### Task
 * `ToListAsync` awaits a task which returns `IEnumerable<T>` and returns `List<T>`
 * `TimeoutAfter` awaits a task to return or timeout passed
 * `DontWait` indicates don't wait for completion of the task is intentionally
 * `ContinueWhenCancelled` ignores `TaskCancelledException` when task is cancelled 
 
-#### TaskFactory
+##### TaskFactory
 * `Schedule` executes a one-shot action after a given delay
 * `ScheduleAtFixedRate` executes a periodic action firstly after the given initial delay and subsequently with the given period
 * `ScheduleAtFixedDelay` executes a periodic action firstly after the given initial delay and subsequently with the given delay
 
-#### HttpMessage
+##### HttpMessage
 * `WithContent` adds request content to a `HttpRequestMessage`
 * `ContentAsStream` reads response content from `HttpResponseMessage` and return as `Stream`

@@ -66,6 +66,7 @@
     <Compile Include="Cache\CacheLoadingTests.cs" />
     <Compile Include="Cache\CacheStatsTests.cs" />
     <Compile Include="Extensions\CollectionExtensionsTests.cs" />
+    <Compile Include="Extensions\DictionarySafeExtensionsTests.cs" />
     <Compile Include="Extensions\EmptyCachesTests.cs" />
     <Compile Include="Extensions\NumberExtensionsTests.cs" />
     <Compile Include="Extensions\PrintExtensionsTests.cs" />
