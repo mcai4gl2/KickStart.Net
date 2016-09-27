@@ -2,15 +2,10 @@
 
 namespace KickStart.Net
 {
-    public sealed class Optional<T> where T : class
+    public struct Optional<T> where T : class
     {
         private static readonly Optional<T> _empty = new Optional<T>();
         private readonly T _value;
-
-        private Optional()
-        {
-            _value = null;
-        }
 
         public static Optional<T> Empty()
         {
@@ -63,8 +58,6 @@ namespace KickStart.Net
 
         public override bool Equals(object obj)
         {
-            if (this == obj)
-                return true;
             if (!(obj is Optional<T>))
                 return false;
             var other = (Optional<T>) obj;
