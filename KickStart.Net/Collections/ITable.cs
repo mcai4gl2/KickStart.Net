@@ -50,7 +50,7 @@ namespace KickStart.Net.Collections
         /// Copies all mappings from the <paramref name="input"/> into the table. The effect is 
         /// the same as calling <see cref="Put"/> for each mapping in <paramref name="input"/>.
         /// </summary>
-        void PutAll<TR, TC, TV>(ITable<TR, TC, TV> input);
+        void PutAll(ITable<TR, TC, TV> input);
         /// <summary>
         /// Removes the mapping if exist.
         /// </summary>
@@ -73,12 +73,13 @@ namespace KickStart.Net.Collections
         /// </summary>
         IReadOnlyCollection<TR> RowKeySet();
         /// <summary>
-        /// Returns a readonly view of all column keys in the table.
+        /// Returns a readonly view of all distinct column keys in the table.
         /// </summary>
         IReadOnlyCollection<TC> ColumnKeySet();
         /// <summary>
         /// Returns a readonly view of all values in the table.
         /// </summary>
+        /// <remarks>The returned values may contain duplicates.</remarks>
         IReadOnlyCollection<TV> Values();
     }
 

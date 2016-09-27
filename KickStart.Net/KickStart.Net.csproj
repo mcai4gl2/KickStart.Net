@@ -77,6 +77,7 @@
     <Compile Include="Cache\IWeigher.cs" />
     <Compile Include="Cache\StatsCounter.cs" />
     <Compile Include="Collections\Combinations.cs" />
+    <Compile Include="Collections\HashBasedTable.cs" />
     <Compile Include="Collections\ITable.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ConstructorHelpers.cs" />

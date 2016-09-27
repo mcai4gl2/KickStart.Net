@@ -7,16 +7,18 @@ KickStart is a collection of useful reusable functions which are too small to be
 
 ## KickStart.Net.dll
 
-* `Objects.GetHashCode` a port of Guava's `MoreObjects.HashCode` which generates a hash code for multiple values
 * `Objects.ToStringHelper` a port of Guava's `MoreObjects.ToStringHelper` which is helpful to implement `ToString` method 
 * `TimeUnits` is a port of Java's `java.util.concurrent.TimeUnit` originally written by Doug Lea as part of JSR-166
 * `Optional<T>` is an immutable object that may contain a non-null reference of type `T`. This ports Java's `java.util.Optional`
 * `Trace.Here()` returns a trace object which contains the line number, method name and file name where the method is called
-* `Collections.Combinations` generates cartesian product based on inputs, e.g.:
+
+### Collections
+* `Combinations` generates cartesian product based on inputs, e.g.:
 ```C#
 var combinations = new Combinations<int>(new[] {1, 2, 3}, new[] {2, 3, 4});
 /// Generates list of: [[1,2],[1,3],[1,4],[2,2],[2,3],[2,4],[3,2],[3,3],[3,4]]
 ```
+* `HashBasedTable` implements `ITable`, which is a collection which associates an ordered pair of keys with a value. This implementation is based on nested `Dictionary` and it is not multi thread safe.
 
 ### Cache
 A port of Guava Cache into C#. More details at [here](KickStart.Net/Cache/README.md).
