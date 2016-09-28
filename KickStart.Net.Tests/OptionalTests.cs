@@ -85,6 +85,7 @@ namespace KickStart.Net.Tests
         public void test_equals_and_hashcode_on_non_empty()
         {
             Assert.AreEqual(Optional<string>.Of("test"), Optional<string>.Of("test"));
+            Assert.AreEqual(Optional<string>.Of("test"), Optional<string>.Of("test-".TrimEnd('-'))); // This makes sure "Test" is a different string
             var op = Optional<string>.Of("a");
             Assert.IsTrue(op.Equals(op));
             Assert.IsFalse(op.Equals(new object()));

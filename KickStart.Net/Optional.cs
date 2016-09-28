@@ -61,7 +61,7 @@ namespace KickStart.Net
             if (!(obj is Optional<T>))
                 return false;
             var other = (Optional<T>) obj;
-            return _value == other._value;
+            return Objects.SafeEquals(_value, other._value);
         }
 
         public override int GetHashCode()
