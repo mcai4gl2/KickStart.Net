@@ -65,5 +65,23 @@ namespace KickStart.Net.Extensions
                 return;
             dictionary.Add(key, value);
         }
+
+        /// <summary>
+        /// Tries to return <paramref name="dictionary"/> values if the <paramref name="dictionary"/> is not null, otherwise return
+        /// <paramref name="defaultValues"/>
+        /// </summary>
+        public static ICollection<TV> SafeValues<TK, TV>(this IDictionary<TK, TV> dictionary, ICollection<TV> defaultValues = null)
+        {
+            return dictionary == null ? defaultValues : dictionary.Values;
+        }
+
+        /// <summary>
+        /// Tries to return <paramref name="dictionary"/> keys if the <paramref name="dictionary"/> is not null, otherwise return
+        /// <paramref name="defaultKeys"/>
+        /// </summary>
+        public static ICollection<TK> SafeKeys<TK, TV>(this IDictionary<TK, TV> dictionary, ICollection<TK> defaultKeys = null)
+        {
+            return dictionary == null ? defaultKeys : dictionary.Keys;
+        }
     }
 }

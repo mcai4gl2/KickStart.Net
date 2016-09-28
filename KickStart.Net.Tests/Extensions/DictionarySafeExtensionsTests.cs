@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using KickStart.Net.Collections;
 using KickStart.Net.Extensions;
 using NUnit.Framework;
 
@@ -110,7 +111,22 @@ namespace KickStart.Net.Tests.Extensions
             dictionary.SafeAdd(2, 3);
             Assert.AreEqual(3, dictionary[2]);
             Assert.AreEqual(2, dictionary.Count);
+        }
 
+        [Test]
+        public void test_safe_keys()
+        {
+            Dictionary<int, int> dict = null;
+            Assert.AreSame(Lists<int>.EmptyList, dict.SafeKeys(Lists<int>.EmptyList));
+            Assert.IsNull(dict.SafeKeys());
+        }
+
+        [Test]
+        public void test_safe_values()
+        {
+            Dictionary<int, int> dict = null;
+            Assert.AreSame(Lists<int>.EmptyList, dict.SafeValues(Lists<int>.EmptyList));
+            Assert.IsNull(dict.SafeValues());
         }
     }
 }

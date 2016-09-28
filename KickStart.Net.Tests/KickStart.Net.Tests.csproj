@@ -60,6 +60,7 @@
     <Compile Include="Cache\FakeTicker.cs" />
     <Compile Include="Cache\PopulatedCachesTests.cs" />
     <Compile Include="Cache\SimpleStatsTests.cs" />
+    <Compile Include="Collections\CollectionsTests.cs" />
     <Compile Include="Collections\CombinationsTests.cs" />
     <Compile Include="Collections\HashBasedTableTests.cs" />
     <Compile Include="ConstantsTests.cs" />

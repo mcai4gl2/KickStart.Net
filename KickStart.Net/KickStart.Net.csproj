@@ -76,6 +76,7 @@
     <Compile Include="Cache\RemovalNotification.cs" />
     <Compile Include="Cache\IWeigher.cs" />
     <Compile Include="Cache\StatsCounter.cs" />
+    <Compile Include="Collections\Collections.cs" />
     <Compile Include="Collections\Combinations.cs" />
     <Compile Include="Collections\HashBasedTable.cs" />
     <Compile Include="Collections\ITable.cs" />
