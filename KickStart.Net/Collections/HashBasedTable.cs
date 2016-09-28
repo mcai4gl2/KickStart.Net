@@ -38,6 +38,13 @@ namespace KickStart.Net.Collections
 
         public bool ContainsValue(TV value) => _backingDictionary.Values.Any(dict => dict.ContainsValue(value));
 
+        public TV Get(TR rowKey, TC columnKey)
+        {
+            if (!Contains(rowKey, columnKey))
+                return default(TV);
+            return _backingDictionary[rowKey][columnKey];
+        }
+
         public bool IsEmpty() => _backingDictionary.Count == 0;
 
         public void Clear() => _backingDictionary.Clear();

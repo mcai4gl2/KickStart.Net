@@ -27,6 +27,15 @@ namespace KickStart.Net.Tests.Collections
         }
 
         [Test]
+        public void can_get()
+        {
+            var table = new HashBasedTable<int?, int?, int?>();
+            Assert.AreEqual(null, table.Get(1, 2));
+            table.Put(1, 2, 3);
+            Assert.AreEqual(3, table.Get(1, 2));
+        }
+
+        [Test]
         public void put_rejects_null_keys()
         {
             var table = new HashBasedTable<int?, int?, int?>();

@@ -32,6 +32,10 @@ namespace KickStart.Net.Collections
         /// <param name="value">value to search for</param>
         bool ContainsValue(TV value);
         /// <summary>
+        /// Returns the value mapped to the given row and column key or default if no such mapping exists.
+        /// </summary>
+        TV Get(TR rowKey, TC columnKey);
+        /// <summary>
         /// Return true is the table is empty.
         /// </summary>
         bool IsEmpty();
