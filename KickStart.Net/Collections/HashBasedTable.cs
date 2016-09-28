@@ -68,7 +68,11 @@ namespace KickStart.Net.Collections
             {
                 if (_backingDictionary.SafeGet(rowKey).SafeContainsKey(columnKey))
                 {
-                    return _backingDictionary.SafeGet(rowKey).SafeGet(columnKey);
+                    var value = _backingDictionary.SafeGet(rowKey).SafeGet(columnKey);
+                    _backingDictionary[rowKey].Remove(columnKey);
+                    if (_backingDictionary[rowKey].Count == 0)
+                        _backingDictionary.Remove(rowKey);
+                    return value;
                 }
             }
             return default(TV);
@@ -89,7 +93,7 @@ namespace KickStart.Net.Collections
                 if (kvp.Value.TryGetValue(columnKey, out value))
                     result.Add(kvp.Key, value);
             }
-            return result;
+            return result.Count == 0 ? null : result;
         }
 
         public IReadOnlyCollection<ICell<TR, TC, TV>> CellSet()
@@ -139,6 +143,16 @@ namespace KickStart.Net.Collections
                 RowKey = rowKey;
                 ColumnKey = columnKey;
                 Value = value;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (!(obj is Cell))
+                    return false;
+                var other = (Cell) obj;
+                return Objects.SafeEquals(RowKey, other.RowKey) &&
+                       Objects.SafeEquals(ColumnKey, other.ColumnKey) &&
+                       Objects.SafeEquals(Value, other.Value);
             }
         }
     }

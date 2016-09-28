@@ -88,6 +88,7 @@
     <Compile Include="Metrics\UniformReservoirTests.cs" />
     <Compile Include="Metrics\UniformSnapshotTests.cs" />
     <Compile Include="Metrics\WeightedSnapshotTests.cs" />
+    <Compile Include="ObjectsTests.cs" />
     <Compile Include="OptionalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimeUnitTests.cs" />

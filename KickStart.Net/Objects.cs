@@ -19,6 +19,17 @@ namespace KickStart.Net
         {
             return new ToStringHelper(className);
         }
+
+        /// <summary>
+        /// Returns true if both inputs are null. Returns false if either inputs are null but not both.
+        /// Otherwise forwarding the call to Equals.
+        /// </summary>
+        public static bool SafeEquals<T>(T value1, T value2)
+        {
+            if (ReferenceEquals(null, value1))
+                return ReferenceEquals(null, value2);
+            return value1.Equals(value2);
+        }
     }
 
     public class ToStringHelper
