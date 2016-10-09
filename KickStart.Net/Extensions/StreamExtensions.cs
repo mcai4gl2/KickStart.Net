@@ -5,6 +5,12 @@ namespace KickStart.Net.Extensions
 {
     public static class StreamExtensions
     {
+        public static bool IsNullOrEmpty(this Stream stream)
+        {
+            if (stream == null) return true;
+            return stream.Length == 0;
+        }
+
         public static Stream ToStream(this string input, Encoding @default = null)
         {
             @default = @default ?? Encoding.Default;

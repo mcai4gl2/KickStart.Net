@@ -9,7 +9,7 @@ namespace KickStart.Net.Metrics
         private const int DefaultSize = 1028;
         private long _count;
         private readonly long[] _values;
-        private Random _random;
+        private ThreadLocal<Random> _random;
 
         public UniformReservoir() 
             : this(DefaultSize)
@@ -22,7 +22,6 @@ namespace KickStart.Net.Metrics
             _values = new long[size];
             foreach (var i in size.Range())
                 _values[i] = 0;
-            _random = new Random();
         }
 
         public int Size()
@@ -42,7 +41,9 @@ namespace KickStart.Net.Metrics
             }
             else
             {
-                var r = NextLong(_random, (ulong)count);
+                if (_random == null)
+                    _random = new ThreadLocal<Random>(() => new Random());
+                var r = NextLong(_random.Value, (ulong)count);
                 if (r < _values.Length)
                 {
                     Interlocked.Exchange(ref _values[(int)r], value);

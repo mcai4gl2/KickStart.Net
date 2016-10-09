@@ -68,6 +68,15 @@ namespace KickStart.Net.Extensions
         public static Task ContinueWhenCancelled(this Task task)
         {
             return task.ContinueWith(_doNothing, TaskContinuationOptions.OnlyOnCanceled);
-        } 
+        }
+
+        /// <summary>
+        /// Returns an async function which negates the input async function result.
+        /// </summary>
+        /// <param name="func">the input function which we want to negate the result of</param>
+        public static Func<Task<bool>> Not(this Func<Task<bool>> func)
+        {
+            return async () => !await func();
+        }
     }
 }
