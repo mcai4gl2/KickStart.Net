@@ -43,6 +43,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
@@ -80,6 +81,11 @@
     <Compile Include="Collections\Combinations.cs" />
     <Compile Include="Collections\HashBasedTable.cs" />
     <Compile Include="Collections\ITable.cs" />
+    <Compile Include="Configurations\AppSettingsConfigurationManager.cs" />
+    <Compile Include="Configurations\IConfiguration.cs" />
+    <Compile Include="Configurations\IConfigurationManager.cs" />
+    <Compile Include="Configurations\InMemoryConfigurationManager.cs" />
+    <Compile Include="Configurations\MergedConfigurationManager.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ConstructorHelpers.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />

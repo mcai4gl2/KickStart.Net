@@ -22,7 +22,7 @@ namespace KickStart.Net.Extensions
             return (int) (second*1000);
         }
 
-        public static TaskAwaiter GetAwaiter(this int millisecs)
+        internal static TaskAwaiter GetAwaiter(this int millisecs)
         {
             return Task.Delay(millisecs).GetAwaiter();
         }

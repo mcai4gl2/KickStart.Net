@@ -7,11 +7,11 @@ namespace KickStart.Net.Collections
         /// <summary>
         /// An empty <see cref="List{T}"/> constant.
         /// </summary>
-        public static readonly List<T> EmptyList = new List<T>();
+        internal static readonly List<T> EmptyList = new List<T>();
         /// <summary>
         /// An empty <see cref="LinkedList{T}"/> constant.
         /// </summary>
-        public static readonly LinkedList<T> EmptyLinkedList = new LinkedList<T>(); 
+        internal static readonly LinkedList<T> EmptyLinkedList = new LinkedList<T>(); 
     }
 
     public static class Dictionaries<TK, TV>
@@ -19,6 +19,6 @@ namespace KickStart.Net.Collections
         /// <summary>
         /// An empty <see cref="Dictionary{TK, TV}"/> constant.
         /// </summary>
-        public static readonly Dictionary<TK, TV> EmptyDictionary = new Dictionary<TK, TV>();
+        internal static readonly Dictionary<TK, TV> EmptyDictionary = new Dictionary<TK, TV>();
     }
 }
