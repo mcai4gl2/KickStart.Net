@@ -63,6 +63,9 @@
     <Compile Include="Collections\CollectionsTests.cs" />
     <Compile Include="Collections\CombinationsTests.cs" />
     <Compile Include="Collections\HashBasedTableTests.cs" />
+    <Compile Include="Configurations\AppSettingsConfigurationManagerTests.cs" />
+    <Compile Include="Configurations\InMemoryConfigurationManagerTests.cs" />
+    <Compile Include="Configurations\MergedConfigurationManagerTests.cs" />
     <Compile Include="ConstantsTests.cs" />
     <Compile Include="Diagnostic\TraceTests.cs" />
     <Compile Include="Cache\CacheLoadingTests.cs" />
@@ -102,6 +105,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="kickstart.snk" />
     <None Include="packages.config" />
   </ItemGroup>

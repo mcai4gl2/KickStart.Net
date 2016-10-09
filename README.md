@@ -23,6 +23,9 @@ var combinations = new Combinations<int>(new[] {1, 2, 3}, new[] {2, 3, 4});
 ### Cache
 A port of Guava Cache into C#. More details at [here](KickStart.Net/Cache/README.md).
 
+### Configurations
+`IConfigurationManager` is a thin wrapper for configuration which supports confirugrationn mocking for testing, combining configurations from different sources.
+
 ### Metrics
 A C# port of Coda Hale's Metrics library [https://github.com/dropwizard/metrics](https://github.com/dropwizard/metrics).
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using KickStart.Net.Extensions;
@@ -80,6 +81,14 @@ namespace KickStart.Net.Tests.Extensions
             cts.Cancel();
             Assert.Throws<TaskCanceledException>(async () => await Task.Delay(100, cts.Token));
             await Task.Delay(100, cts.Token).ContinueWhenCancelled();
+        }
+
+        [Test]
+        public async Task can_negate_a_function()
+        {
+            Func<Task<bool>> func = () => Task.FromResult(true);
+            var negate = func.Not();
+            Assert.IsFalse(await negate());
         }
     }
 }

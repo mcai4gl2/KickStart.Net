@@ -73,5 +73,13 @@ namespace KickStart.Net
         {
             return _value != null ? $"Optional[{_value}]" : "Optional.Empty";
         }
+
+        public static bool operator ==(Optional<T> left, object right) => left.Equals(right);
+
+        public static bool operator !=(Optional<T> left, object right) => !left.Equals(right);
+
+        public static implicit operator Optional<T>(T value) => OfNullable(value);
+
+        public static explicit operator T(Optional<T> value) => value.Value;
     }
 }
