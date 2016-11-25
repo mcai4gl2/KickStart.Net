@@ -13,3 +13,9 @@ build_script:
 test: off
 artifacts:
 - path: artifacts/KickStart.*.nupkg
+deploy:
+- provider: NuGet
+  api_key:
+    secure: AYgSCHqJ+5wNELEPdqsQp69oW01zE+P6mG/NhHBQ6wMQc7Y1SplvhaLU+Whg6JZt
+  on:
+    branch: core
