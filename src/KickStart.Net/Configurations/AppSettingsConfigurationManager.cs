@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !NET_CORE
+using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Collections.Generic;
@@ -119,3 +120,4 @@ namespace KickStart.Net.Configurations
         }
     }
 }
+#endif

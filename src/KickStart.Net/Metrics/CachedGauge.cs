@@ -27,11 +27,26 @@ namespace KickStart.Net.Metrics
         {
             if (ShouldLoad())
             {
+#if !NET_CORE
                 Thread.MemoryBarrier();
+#endif
+#if NET_CORE
+                Interlocked.MemoryBarrier();
+#endif
                 _value = LoadValue();
+#if !NET_CORE
                 Thread.MemoryBarrier();
+#endif
+#if NET_CORE
+                Interlocked.MemoryBarrier();
+#endif
             }
+#if !NET_CORE
             Thread.MemoryBarrier();
+#endif
+#if NET_CORE
+            Interlocked.MemoryBarrier();
+#endif
             return _value;
         }
 

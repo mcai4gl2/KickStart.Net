@@ -13,7 +13,12 @@ namespace KickStart.Net.Extensions
 
         public static Stream ToStream(this string input, Encoding @default = null)
         {
+#if !NET_CORE
             @default = @default ?? Encoding.Default;
+#endif
+#if NET_CORE
+            @default = @default ?? Encoding.UTF8;
+#endif
             var stream = new MemoryStream(@default.GetBytes(input));
             stream.Seek(0, SeekOrigin.Begin);
             return stream;
@@ -28,7 +33,12 @@ namespace KickStart.Net.Extensions
 
         public static string StreamToString(this Stream stream, Encoding @default = null)
         {
+#if !NET_CORE
             @default = @default ?? Encoding.Default;
+#endif
+#if NET_CORE
+            @default = @default ?? Encoding.UTF8;
+#endif
             using (var reader = new StreamReader(stream, @default))
             {
                 return reader.ReadToEnd();

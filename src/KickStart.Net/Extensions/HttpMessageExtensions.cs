@@ -16,7 +16,12 @@ namespace KickStart.Net.Extensions
 
         public static void WithContent(this HttpRequestMessage request, string content, string mediaType, Encoding encoding = null)
         {
+#if !NET_CORE
             request.Content = new StringContent(content, encoding??Encoding.Default, mediaType);
+#endif
+#if NET_CORE
+            request.Content = new StringContent(content, encoding??Encoding.UTF8, mediaType);
+#endif
         }
 
         public static async Task<Stream> ContentAsStream(this HttpResponseMessage response)

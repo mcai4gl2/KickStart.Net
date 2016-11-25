@@ -1,0 +1,19 @@
+﻿{
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+    "NUnit": "2.*",
+    "NSubstitute": "1.*",
+    "KickStart.Net": "0.4.0-*"
+  },
+  "buildOptions": {
+    "keyFile": "../../kickstart.snk"
+  },
+  "frameworks": {
+    "net4.5": {
+      "frameworkAssemblies": {
+        "System.Configuration": "4.0.0",
+        "System.ComponentModel": "4.0.0"
+      }
+    }
+  }
+}

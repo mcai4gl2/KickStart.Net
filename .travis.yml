@@ -1,5 +1,8 @@
 language: csharp
 solution: KickStart.Net.sln
+branches:
+  except:
+    - core
 install:
   - nuget restore KickStart.Net.sln
   - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
