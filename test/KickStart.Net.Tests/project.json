@@ -1,6 +1,8 @@
 ﻿{
   "dependencies": {
     "NETStandard.Library": "1.6.0",
+    "dotnet-test-nunit": "3.4.0-beta-2",
+    "NUnit": "3.5.0",
     "KickStart.Net": {
       "target": "project"
     }
@@ -13,8 +15,6 @@
     "netcoreapp1.0": {
       "imports": "portable-net45+win8",
       "dependencies": {
-        "NUnit": "3.5.0",
-		"dotnet-test-nunit": "3.4.0-beta-2",
         "System.Threading.Thread": "4.3.0",
         "Microsoft.NETCore.App": {
           "version": "1.0.0-*",
@@ -25,10 +25,7 @@
         "define": [ "NET_CORE" ]
       }
     },
-    "net4.5": {
-      "dependencies": {
-        "NUnit": "2.*"
-      },
+    "net451": {
       "frameworkAssemblies": {
         "System.Configuration": "4.0.0",
         "System.ComponentModel": "4.0.0"

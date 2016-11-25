@@ -1,4 +1,4 @@
-﻿#if !NET_CORE
+﻿/*
 using System.Collections.Generic;
 using System.Linq;
 using KickStart.Net.Collections;
@@ -171,4 +171,4 @@ namespace KickStart.Net.Tests.Configurations
         }
     }
 }
-#endif
+*/

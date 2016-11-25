@@ -13,3 +13,4 @@ packages/
 _NCrunch*
 project.lock.json
 artifacts/
+TestResult.xml

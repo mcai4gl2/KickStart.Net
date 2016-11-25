@@ -41,7 +41,7 @@ namespace KickStart.Net.Tests.Metrics
 
     public class StubClock : IClock
     {
-        private long[] _ticks;
+        private readonly long[] _ticks;
         private int _pointer;
 
         public StubClock(params long[] ticks)
@@ -50,9 +50,6 @@ namespace KickStart.Net.Tests.Metrics
             _pointer = 0;
         }
 
-        public long Tick
-        {
-            get { return _ticks[_pointer++]; }
-        }
+        public long Tick => _pointer < _ticks.Length ? _ticks[_pointer++] : _ticks[_pointer - 1];
     }
 }

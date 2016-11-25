@@ -81,8 +81,21 @@ namespace KickStart.Net.Tests.Extensions
         {
             var cts = new CancellationTokenSource();
             cts.Cancel();
-            Assert.Throws<TaskCanceledException>(async () => await Task.Delay(100, cts.Token));
+            try
+            {
+                await Sleep(cts.Token);
+                Assert.Fail();
+            }
+            catch (TaskCanceledException)
+            {
+                
+            }
             await Task.Delay(100, cts.Token).ContinueWhenCancelled();
+        }
+
+        private async Task Sleep(CancellationToken token)
+        {
+            await Task.Delay(100, token);
         }
 
         [Test]
