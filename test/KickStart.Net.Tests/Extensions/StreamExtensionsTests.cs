@@ -15,7 +15,7 @@ namespace KickStart.Net.Tests.Extensions
         public void test_to_stream_from_byte_array()
         {
             var input = "Input test data";
-            var bytes = Encoding.Default.GetBytes(input);
+            var bytes = Encoding.UTF8.GetBytes(input);
             var stream = bytes.ToStream();
             Assert.AreEqual(input, stream.StreamToString());
         }

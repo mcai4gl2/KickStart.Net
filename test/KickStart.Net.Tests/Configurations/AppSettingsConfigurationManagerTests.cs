@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if !NET_CORE
+using System.Collections.Generic;
 using System.Linq;
 using KickStart.Net.Collections;
 using KickStart.Net.Configurations;
@@ -170,3 +171,4 @@ namespace KickStart.Net.Tests.Configurations
         }
     }
 }
+#endif

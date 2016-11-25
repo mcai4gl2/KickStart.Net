@@ -1,5 +1,4 @@
 ﻿using KickStart.Net.Metrics;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace KickStart.Net.Tests.Metrics
@@ -13,8 +12,7 @@ namespace KickStart.Net.Tests.Metrics
         [SetUp]
         public void SetUp()
         {
-            _clock = Substitute.For<IClock>();
-            _clock.Tick.Returns(0L, 0L, TimeUnits.Seconds.ToTicks(10)); // First 0 is for the constructor
+            _clock = new StubClock(0L, 0L, TimeUnits.Seconds.ToTicks(10)); // First 0 is for the constructor
             _meter = new Meter(_clock);
         }
 
@@ -38,6 +36,23 @@ namespace KickStart.Net.Tests.Metrics
             Assert.AreEqual(0.1840, _meter.OneMinuteRate, 0.001);
             Assert.AreEqual(0.19666, _meter.FiveMinutesRate, 0.001);
             Assert.AreEqual(0.1988, _meter.FifteenMinutesRate, 0.001);
+        }
+    }
+
+    public class StubClock : IClock
+    {
+        private long[] _ticks;
+        private int _pointer;
+
+        public StubClock(params long[] ticks)
+        {
+            _ticks = ticks;
+            _pointer = 0;
+        }
+
+        public long Tick
+        {
+            get { return _ticks[_pointer++]; }
         }
     }
 }

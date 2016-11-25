@@ -17,12 +17,12 @@
     "xmlDoc": true
   },
   "frameworks": {
-    "netstandard1.3": {
+    "netstandard1.5": {
       "dependencies": {
         "System.Net.Http": "4.3.0",
         "System.Diagnostics.Contracts": "4.3.0",
         "System.Console": "4.0.0",
-        "system.componentmodel.typeconverter": "4.3.0"
+        "System.Componentmodel.TypeConverter": "4.3.0"
       },
       "buildOptions": {
         "define": [ "NET_CORE" ]

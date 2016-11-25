@@ -8,7 +8,9 @@ using NUnit.Framework;
 namespace KickStart.Net.Tests.Extensions
 {
     [TestFixture]
+#if !NET_CORE
     [Timeout(5000)]
+#endif
     public class TaskFactoryExtensionsTests
     {
         [Test]

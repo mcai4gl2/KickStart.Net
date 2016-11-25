@@ -1,5 +1,4 @@
 ﻿using KickStart.Net.Metrics;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace KickStart.Net.Tests.Metrics
@@ -23,20 +22,44 @@ namespace KickStart.Net.Tests.Metrics
         [Test]
         public void snapshot_of_reservoir_is_returned()
         {
-            var reservior = Substitute.For<IReservoir>();
+            var reservior = new StubReservior();
             var histogram = new Histogram(reservior);
             var snapshot = new UniformSnapshot();
-            reservior.GetSnapshot().Returns(snapshot);
+            reservior.Snapshot = snapshot;
             Assert.AreEqual(snapshot, histogram.GetSnapshot());
         }
 
         [Test]
         public void update_updates_reservoir()
         {
-            var reservior = Substitute.For<IReservoir>();
+            var reservior = new StubReservior();
             var histogram = new Histogram(reservior);
             histogram.Update(1);
-            reservior.Received().Update(Arg.Is(1L));
+            Assert.AreEqual(1, reservior.UpdateCallCount);
+            Assert.AreEqual(1L, reservior.LastUpdateParam);
+        }
+    }
+
+    class StubReservior : IReservoir
+    {
+        public Snapshot Snapshot { get; set; }
+        public int UpdateCallCount { get; private set; } = 0;
+        public long LastUpdateParam { get; private set; }
+
+        public int Size()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Update(long value)
+        {
+            UpdateCallCount++;
+            LastUpdateParam = value;
+        }
+
+        public Snapshot GetSnapshot()
+        {
+            return Snapshot;
         }
     }
 }

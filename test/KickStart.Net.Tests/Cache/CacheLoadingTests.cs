@@ -464,7 +464,7 @@ namespace KickStart.Net.Tests.Cache
 
         [Test]
 #if RELEASE
-        [Ignore]
+        [Ignore("Fail on CI")]
 #endif
         public void test_reload_after_failure()
         {
@@ -494,9 +494,11 @@ namespace KickStart.Net.Tests.Cache
         }
 
         [Test]
+#if !NET_CORE
         [Timeout(1000)]
+#endif
 #if RELEASE
-        [Ignore]
+        [Ignore("Fail on CI")]
 #endif
         public async Task test_concurrent_loading_default()
         {
@@ -523,8 +525,10 @@ namespace KickStart.Net.Tests.Cache
         }
 
         [Test]
+#if !NET_CORE
         [Timeout(10*000)]
-        [Ignore]
+#endif
+        [Ignore("Fail on CI")]
         public async Task test_concurrent_loading_null()
         {
             var count = 10;

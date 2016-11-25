@@ -7,6 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{520483B1-A18
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{34FDD2B2-9193-446B-A21E-0F0DCADE84B0}"
 	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
+		Build.ps1 = Build.ps1
 		global.json = global.json
 		kickstart.snk = kickstart.snk
 		LICENSE.txt = LICENSE.txt

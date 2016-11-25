@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using KickStart.Net.Cache;
 using KickStart.Net.Extensions;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace KickStart.Net.Tests.Cache
@@ -17,26 +16,25 @@ namespace KickStart.Net.Tests.Cache
         {
             var ticker = new FakeTicker();
             var removalListener = new CountingRemovalListener<int?, int?>();
-            var loader = Substitute.For<ICacheLoader<int?, int?>>();
+            var loader = new StubCacheLoader<int?>();
             var cache = CacheBuilder<int?, int?>.NewBuilder()
                 .WithExpireAfterWrite(new TimeSpan(0, 0, 0, 1)) // Setting expire after access
                 .WithTicker(ticker)
                 .WithRemovalListener(removalListener)
                 .Build(loader);
-            loader.LoadAsync(Arg.Any<int?>()).Returns(i => Task.FromResult(i.ArgAt<int?>(0)));
 
             foreach (var i in 10.Range())
             {
                 Assert.AreEqual(i, cache.Get(i));
             }
 
-            loader.Received(10).LoadAsync(Arg.Any<int?>());
+            Assert.AreEqual(10, loader.LoadAsyncParams.Count);
             
             foreach (var i in 10.Range())
             {
-                loader.ClearReceivedCalls();
+                loader.ResetLoadAsyncParams();
                 Assert.AreEqual(i, cache.Get(i));
-                loader.DidNotReceive().LoadAsync(Arg.Any<int?>()); // All values are cached
+                Assert.AreEqual(0, loader.LoadAsyncParams.Count); // All values are cached
             }
 
             ((LocalManualCache<int?, int?>)cache)._localCache.ExpireEntries(new TimeSpan(0, 0, 0, 1).Ticks, ticker);
@@ -53,27 +51,26 @@ namespace KickStart.Net.Tests.Cache
         {
             var ticker = new FakeTicker();
             var removalListener = new CountingRemovalListener<int?, int?>();
-            var loader = Substitute.For<ICacheLoader<int?, int?>>();
+            var loader = new StubCacheLoader<int?>();
             var cache = CacheBuilder<int?, int?>.NewBuilder()
                 .WithExpireAfterAccess(TimeSpan.FromMilliseconds(1)) // Setting expire after access
                 .WithTicker(ticker)
                 .WithRemovalListener(removalListener)
                 .RecordStats()
                 .Build(loader);
-            loader.LoadAsync(Arg.Any<int?>()).Returns(i => Task.FromResult(i.ArgAt<int?>(0)));
 
             foreach (var i in 10.Range())
             {
                 Assert.AreEqual(i, cache.Get(i));
             }
 
-            loader.Received(10).LoadAsync(Arg.Any<int?>());
+            Assert.AreEqual(10, loader.LoadAsyncParams.Count);
 
             foreach (var i in 10.Range())
             {
-                loader.ClearReceivedCalls();
+                loader.ResetLoadAsyncParams();
                 Assert.AreEqual(i, cache.Get(i));
-                loader.DidNotReceive().LoadAsync(Arg.Any<int?>()); // All values are cached
+                Assert.AreEqual(0, loader.LoadAsyncParams.Count); // All values are cached
             }
 
             ((LocalManualCache<int?, int?>)cache)._localCache.ExpireEntries(new TimeSpan(0, 0, 0, 1).Ticks, ticker);
@@ -90,26 +87,25 @@ namespace KickStart.Net.Tests.Cache
         {
             var ticker = new FakeTicker();
             var removalListener = new CountingRemovalListener<int?, int?>();
-            var loader = Substitute.For<ICacheLoader<int?, int?>>();
+            var loader = new StubCacheLoader<int?>();
             var cache = CacheBuilder<int?, int?>.NewBuilder()
                 .WithExpireAfterWrite(new TimeSpan(0, 0, 0, 1)) // Setting expire after access
                 .WithTicker(ticker)
                 .WithRemovalListener(removalListener)
                 .Build(loader);
-            loader.LoadAsync(Arg.Any<int?>()).Returns(i => Task.FromResult(i.ArgAt<int?>(0)));
 
             foreach (var i in 10.Range())
             {
                 Assert.AreEqual(i, cache.Get(i));
             }
 
-            loader.Received(10).LoadAsync(Arg.Any<int?>());
+            Assert.AreEqual(10, loader.LoadAsyncParams.Count);
 
             foreach (var i in 10.Range())
             {
-                loader.ClearReceivedCalls();
+                loader.ResetLoadAsyncParams();
                 Assert.AreEqual(i, cache.Get(i));
-                loader.DidNotReceive().LoadAsync(Arg.Any<int?>()); // All values are cached
+                Assert.AreEqual(0, loader.LoadAsyncParams.Count); // All values are cached
             }
 
             ticker.Advance(new TimeSpan(0, 0, 0, 1).Ticks);
@@ -125,9 +121,9 @@ namespace KickStart.Net.Tests.Cache
 
             foreach (var i in 10.Range())
             {
-                loader.ClearReceivedCalls();
+                loader.ResetLoadAsyncParams();
                 Assert.AreEqual(i, cache.Get(i));
-                loader.Received(1).LoadAsync(Arg.Any<int?>()); // Values no longer cached
+                Assert.AreEqual(1, loader.LoadAsyncParams.Count); // Values no longer cached
             }
 
             ((LocalManualCache<int?, int?>)cache)._localCache.ExpireEntries(new TimeSpan(0, 0, 0, 1).Ticks, ticker);
@@ -140,26 +136,25 @@ namespace KickStart.Net.Tests.Cache
         {
             var ticker = new FakeTicker();
             var removalListener = new CountingRemovalListener<int?, int?>();
-            var loader = Substitute.For<ICacheLoader<int?, int?>>();
+            var loader = new StubCacheLoader<int?>();
             var cache = CacheBuilder<int?, int?>.NewBuilder()
                 .WithExpireAfterAccess(new TimeSpan(0, 0, 0, 1)) // Setting expire after access
                 .WithTicker(ticker)
                 .WithRemovalListener(removalListener)
                 .Build(loader);
-            loader.LoadAsync(Arg.Any<int?>()).Returns(i => Task.FromResult(i.ArgAt<int?>(0)));
 
             foreach (var i in 10.Range())
             {
                 Assert.AreEqual(i, cache.Get(i));
             }
 
-            loader.Received(10).LoadAsync(Arg.Any<int?>());
+            Assert.AreEqual(10, loader.LoadAsyncParams.Count);
 
             foreach (var i in 10.Range())
             {
-                loader.ClearReceivedCalls();
+                loader.ResetLoadAsyncParams();
                 Assert.AreEqual(i, cache.Get(i));
-                loader.DidNotReceive().LoadAsync(Arg.Any<int?>()); // All values are cached
+                Assert.AreEqual(0, loader.LoadAsyncParams.Count); // All values are cached
             }
 
             ticker.Advance(new TimeSpan(0, 0, 0, 1).Ticks);
@@ -238,13 +233,12 @@ namespace KickStart.Net.Tests.Cache
         {
             var ticker = new FakeTicker();
             var removalListener = new CountingRemovalListener<int?, int?>();
-            var loader = Substitute.For<ICacheLoader<int?, int?>>();
+            var loader = new StubCacheLoader<int?>();
             var cache = CacheBuilder<int?, int?>.NewBuilder()
                 .WithExpireAfterAccess(new TimeSpan(0, 0, 0, 11)) // Setting expire after access
                 .WithTicker(ticker)
                 .WithRemovalListener(removalListener)
                 .Build(loader);
-            loader.LoadAsync(Arg.Any<int?>()).Returns(i => Task.FromResult(i.ArgAt<int?>(0)));
 
             foreach (var i in 10.Range())
             {
@@ -295,6 +289,32 @@ namespace KickStart.Net.Tests.Cache
         {
             _count += 1;
             _removalNotifications.Add(notification);
+        }
+    }
+
+    class StubCacheLoader<TK> : ICacheLoader<TK, TK>
+    {
+        public List<TK> LoadAsyncParams = new List<TK>();
+
+        public void ResetLoadAsyncParams()
+        {
+            LoadAsyncParams = new List<TK>();
+        } 
+
+        public Task<TK> LoadAsync(TK key)
+        {
+            LoadAsyncParams.Add(key);
+            return Task.FromResult(key);
+        }
+
+        public Task<TK> ReloadAsync(TK key, TK oldValue)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IReadOnlyDictionary<TK, TK> LoadAllAsync(IReadOnlyCollection<TK> keys)
+        {
+            throw new NotImplementedException();
         }
     }
 }
