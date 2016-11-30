@@ -1,0 +1,33 @@
+﻿{
+  "version": "0.4.0-*",
+  "dependencies": {
+    "NETStandard.Library": "1.6.0"
+  },
+  "packOptions": {
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "projectUrl": "https://github.com/mcai4gl2/KickStart.Net",
+    "requireLicenseAcceptance": false
+  },
+  "authors": [ "KickStart Contributors" ],
+  "description": "A collection of useful reusable functions which are too small to be have its own library",
+  "language": "en-US",
+  "title": "KickStart.Net",
+  "buildOptions": {
+    "keyFile": "../../kickstart.snk",
+    "xmlDoc": true
+  },
+  "frameworks": {
+    "netstandard1.3": {
+      "dependencies": {
+        "System.Diagnostics.Contracts": "4.3.0",
+        "System.Console": "4.0.0"
+      },
+      "buildOptions": {
+        "define": [ "NET_CORE" ]
+      }
+    },
+    "net4.5": {
+
+    }
+  }
+}

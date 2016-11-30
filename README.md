@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mcai4gl2/KickStart.Net.svg)](https://travis-ci.org/mcai4gl2/KickStart.Net)
+[![Build status](https://ci.appveyor.com/api/projects/status/bvk29vnl7o7tna9s?svg=true)](https://ci.appveyor.com/project/mcai4gl2/kickstart-net)
 [![NuGet Status](http://img.shields.io/nuget/v/KickStart.Net.svg?style=flat)](https://www.nuget.org/packages/KickStart.Net/)
 
 # KickStart.Net
@@ -21,10 +21,7 @@ var combinations = new Combinations<int>(new[] {1, 2, 3}, new[] {2, 3, 4});
 * `HashBasedTable` implements `ITable`, which is a collection which associates an ordered pair of keys with a value. This implementation is based on nested `Dictionary` and it is not multi thread safe.
 
 ### Cache
-A port of Guava Cache into C#. More details at [here](KickStart.Net/Cache/README.md).
-
-### Configurations
-`IConfigurationManager` is a thin wrapper for configuration which supports confirugrationn mocking for testing, combining configurations from different sources.
+A port of Guava Cache into C#. More details at [here](src/KickStart.Net/Cache/README.md).
 
 ### Metrics
 A C# port of Coda Hale's Metrics library [https://github.com/dropwizard/metrics](https://github.com/dropwizard/metrics).
@@ -66,7 +63,3 @@ A C# port of Coda Hale's Metrics library [https://github.com/dropwizard/metrics]
 * `Schedule` executes a one-shot action after a given delay
 * `ScheduleAtFixedRate` executes a periodic action firstly after the given initial delay and subsequently with the given period
 * `ScheduleAtFixedDelay` executes a periodic action firstly after the given initial delay and subsequently with the given delay
-
-##### HttpMessage
-* `WithContent` adds request content to a `HttpRequestMessage`
-* `ContentAsStream` reads response content from `HttpResponseMessage` and return as `Stream`
