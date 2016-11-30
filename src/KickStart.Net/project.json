@@ -1,7 +1,7 @@
 ﻿{
-  "version": "0.4.0-*",
+  "version": "0.4.5-*",
   "dependencies": {
-    "NETStandard.Library": "1.6.0"
+
   },
   "packOptions": {
     "licenseUrl": "https://opensource.org/licenses/MIT",
@@ -19,6 +19,7 @@
   "frameworks": {
     "netstandard1.3": {
       "dependencies": {
+        "NETStandard.Library": "1.6.0",
         "System.Diagnostics.Contracts": "4.3.0",
         "System.Console": "4.0.0"
       },

@@ -1,6 +1,5 @@
 ﻿{
   "dependencies": {
-    "NETStandard.Library": "1.6.0",
     "dotnet-test-nunit": "3.4.0-beta-2",
     "NUnit": "3.5.0",
     "KickStart.Net": {
@@ -26,10 +25,7 @@
       }
     },
     "net451": {
-      "frameworkAssemblies": {
-        "System.Configuration": "4.0.0",
-        "System.ComponentModel": "4.0.0"
-      }
+
     }
   }
 }
