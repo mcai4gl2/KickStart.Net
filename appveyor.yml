@@ -1,4 +1,5 @@
 version: '{build}'
+skip_tags: true
 image: Visual Studio 2015
 configuration: Release
 install:
@@ -17,4 +18,4 @@ deploy:
   api_key:
     secure: AYgSCHqJ+5wNELEPdqsQp69oW01zE+P6mG/NhHBQ6wMQc7Y1SplvhaLU+Whg6JZt
   on:
-    appveyor_repo_tag: true
+    branch: /^(master|dev)$/
