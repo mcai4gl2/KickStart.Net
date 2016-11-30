@@ -111,6 +111,7 @@ namespace KickStart.Net.Tests.Cache
         }
 
         [Test]
+        [Ignore("Needs to be rewrite as it depends on the speed so the outcome is inconsistent")]
         public void test_refresh()
         {
             var one = new object();
