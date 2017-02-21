@@ -60,6 +60,18 @@ namespace KickStart.Net.Tests
         }
 
         [Test]
+        public void test_lazy_or()
+        {
+            Func<string> defaultValue = () => "other";
+            Assert.AreEqual("test", Optional<string>.Of("test").Or(defaultValue));
+            Assert.AreEqual("other", Optional<string>.Empty().Or(defaultValue));
+
+            Func<Optional<string>> defaultValue2 = () => Optional<string>.Of("other");
+            Assert.AreEqual(Optional<string>.Of("test"), Optional<string>.Of("test").Or(defaultValue2));
+            Assert.AreEqual(Optional<string>.Of("other"), Optional<string>.Empty().Or(defaultValue2));
+        }
+
+        [Test]
         public void test_or_optional()
         {
             Assert.AreEqual(Optional<string>.Of("test"), Optional<string>.Of("test").Or(Optional<string>.Empty()));
@@ -97,6 +109,38 @@ namespace KickStart.Net.Tests
         {
             Assert.AreEqual("Optional[Test]", Optional<string>.Of("Test").ToString());
             Assert.AreEqual("Optional.Empty", Optional<string>.Empty().ToString());
+        }
+
+        [Test]
+        public void test_map()
+        {
+            Func<string, string> map = from => from.ToUpper();
+            Assert.AreEqual(Optional<string>.Of("TEST"), Optional<string>.Of("test").Map(map));
+            Assert.IsFalse(Optional<string>.Empty().Map(map).IsPresent);
+
+            Func<string, OptionalTests> map2 = _ =>
+            {
+                throw new Exception();
+            };
+            Assert.IsFalse(Optional<string>.Empty().Map(map2).IsPresent);
+        }
+
+        [Test]
+        public void test_where()
+        {
+            var optional = Optional<string>.Of("test");
+            Assert.AreEqual(optional, optional.Where(o => true));
+            Assert.AreNotSame(optional, optional.Where(o => true)); // This is an interesting one. Shall I make Optional a class instead of struct?
+            optional = Optional<string>.Empty();
+            Assert.AreEqual(optional, optional.Where(o => true));
+            Assert.AreNotSame(optional, optional.Where(o => true)); // This is an interesting one. Shall I make Optional a class instead of struct?
+
+            Predicate<string> filter = _ =>
+            {
+                throw new Exception();
+            };
+            Assert.AreEqual(optional, optional.Where(filter));
+            Assert.AreNotSame(optional, optional.Where(filter)); // This is an interesting one. Shall I make Optional a class instead of struct?
         }
     }
 }
