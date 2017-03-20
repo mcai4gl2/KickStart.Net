@@ -130,17 +130,16 @@ namespace KickStart.Net.Tests
         {
             var optional = Optional<string>.Of("test");
             Assert.AreEqual(optional, optional.Where(o => true));
-            Assert.AreNotSame(optional, optional.Where(o => true)); // This is an interesting one. Shall I make Optional a class instead of struct?
+            Assert.AreSame(optional, optional.Where(o => true));
             optional = Optional<string>.Empty();
             Assert.AreEqual(optional, optional.Where(o => true));
-            Assert.AreNotSame(optional, optional.Where(o => true)); // This is an interesting one. Shall I make Optional a class instead of struct?
-
+            Assert.AreSame(optional, optional.Where(o => true)); 
             Predicate<string> filter = _ =>
             {
                 throw new Exception();
             };
             Assert.AreEqual(optional, optional.Where(filter));
-            Assert.AreNotSame(optional, optional.Where(filter)); // This is an interesting one. Shall I make Optional a class instead of struct?
+            Assert.AreSame(optional, optional.Where(filter));
         }
     }
 }
