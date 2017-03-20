@@ -1,7 +1,7 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26114.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{520483B1-A18A-4E12-91AE-65FC15DCD2D3}"
 EndProject
@@ -9,15 +9,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
 		Build.ps1 = Build.ps1
-		global.json = global.json
 		kickstart.snk = kickstart.snk
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "KickStart.Net", "src\KickStart.Net\KickStart.Net.xproj", "{22C80694-ACF5-487C-9BBF-C32912CC0CFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickStart.Net", "src\KickStart.Net\KickStart.Net.csproj", "{22C80694-ACF5-487C-9BBF-C32912CC0CFF}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "KickStart.Net.Tests", "test\KickStart.Net.Tests\KickStart.Net.Tests.xproj", "{37435E34-3F24-471F-954E-3F3E06A04A92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickStart.Net.Tests", "test\KickStart.Net.Tests\KickStart.Net.Tests.csproj", "{37435E34-3F24-471F-954E-3F3E06A04A92}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9F5A6B33-7A86-4726-B384-07036914BA77}"
 EndProject
